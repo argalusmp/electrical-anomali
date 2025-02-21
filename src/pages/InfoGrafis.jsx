@@ -9,10 +9,8 @@ import {
   LineChartTrenPenurunanTotalAnomaliperBulan,
   PenurunanTotalAnomaliperBulan,
 } from "../component/InfoGrafis/PenurunanTotalAnomaliperBulan";
-import {
-  LineChartTrenPenurunanperBidang,
-  PenurunanperBidang,
-} from "../component/InfoGrafis/PenurunanPerBidang";
+import { LineChartTrenPenurunanperBidang } from "../component/InfoGrafis/PenurunanPerBidang";
+import { PenurunanperBidang } from "../component/InfoGrafis/PenurunanPerBidang";
 import {
   AnomaliClosedBarChart,
   AnomaliClosedperBulan,
