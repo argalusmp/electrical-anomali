@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { supabase } from '../../utils/supabaseClient';
 
-const SummaryTableAnomaliGardu = () => {
+const SummaryTableAnomaliJaringan = () => {
   const [data, setData] = useState([]);
   const [processedData, setProcessedData] = useState([]);
   const [grandTotal, setGrandTotal] = useState({ open: 0, closed: 0, total: 0 });
@@ -10,7 +10,7 @@ const SummaryTableAnomaliGardu = () => {
   useEffect(() => {
     const fetchData = async () => {
       const { data: anomaliData, error } = await supabase
-        .from("anomali_garduinduk")
+        .from("anomali_jaringan")
         .select("kategori_anomali, status_anomali");
       
       if (error) {
@@ -122,4 +122,4 @@ const SummaryTableAnomaliGardu = () => {
   );
 };
 
-export default SummaryTableAnomaliGardu;
+export default SummaryTableAnomaliJaringan;

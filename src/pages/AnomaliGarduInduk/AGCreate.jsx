@@ -154,7 +154,7 @@ const AGCreate = () => {
       <CardBody className="=px-0">
         {error && <Typography color="red">{error}</Typography>}
         <form className="mt-8 mb-2 mx-5">
-          <div className="grid grid-cols-2 gap-10">
+          <div className="md:grid md:grid-cols-2 md:gap-10 grid grid-cols-1">
             <div className="kolom-1">
               <div className="mb-3 flex flex-col">
                 <Typography variant="h6" color="blue-gray" className="">
@@ -273,7 +273,7 @@ const AGCreate = () => {
             </div>
           </div>
 
-          <div className="kolom-span-date grid grid-cols-3 gap-10">
+          <div className="kolom-span-date md:grid md:grid-cols-2 md:gap-10 grid grid-cols-1">
             <div className="mb-3 flex flex-col">
               <Typography variant="h6" color="blue-gray" className="">
                 Tanggal Temuan
@@ -312,7 +312,7 @@ const AGCreate = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-10">
+          <div className="md:grid md:grid-cols-2 md:gap-10 grid grid-cols-1">
             <div className="kolom-1">
               <div className="mb-3 flex flex-col">
                 <Typography variant="h6" color="blue-gray" className="">
@@ -411,9 +411,9 @@ const AGCreate = () => {
                     setStatusAnomali(e);
                   }}
                 >
-                  <Option key="close" value="CLOSE">
+                  <Option key="closed" value="CLOSED">
                     {" "}
-                    CLOSE{" "}
+                    CLOSED{" "}
                   </Option>
                   <Option key="open" value="OPEN">
                     {" "}

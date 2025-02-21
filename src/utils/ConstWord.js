@@ -154,8 +154,8 @@ export const TABS = [
     value: "All",
   },
   {
-    label: "CLOSE",
-    value: "CLOSE",
+    label: "CLOSED",
+    value: "CLOSED",
   },
   {
     label: "OPEN",

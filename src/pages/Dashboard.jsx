@@ -18,9 +18,9 @@ import {
   Typography,
 } from "@material-tailwind/react";
 
-import SummaryTableAnomaliGardu from "../component/InfoGrafis.jsx/SummaryTableAnomaliGardu";
-import SummaryTableAnomaliJaringan from "../component/InfoGrafis.jsx/SummaryTableAnomaliJaringan";
-import SummaryTableAnomaliProteksi from "../component/InfoGrafis.jsx/SummaryTableAnomaliProteksi";
+import SummaryTableAnomaliGardu from "../component/Dashboard/SummaryTableAnomaliGardu";
+import SummaryTableAnomaliJaringan from "../component/Dashboard/SummaryTableAnomaliJaringan";
+import SummaryTableAnomaliProteksi from "../component/Dashboard/SummaryTableAnomaliProteksi";
 
 const Dashboard = () => {
   // State untuk menyimpan data dari berbagai tabel
@@ -64,7 +64,7 @@ const Dashboard = () => {
       }
       if (item.status_anomali.toLowerCase() === "open") {
         acc[category].open += 1;
-      } else if (item.status_anomali.toLowerCase() === "close") {
+      } else if (item.status_anomali.toLowerCase() === "closed") {
         acc[category].closed += 1;
       }
       return acc;
@@ -122,10 +122,10 @@ const Dashboard = () => {
           </div>
         </div>
       </CardHeader>
-      <CardBody className="grid grid-cols-3">
+      <CardBody className="md:grid md:grid-cols-3 flex flex-wrap flex-row">
         <div className="w-full max-w-6xl mx-auto p-4">
           <div className="bg-white rounded-lg shadow-lg p-6">
-            <h2 className="text-xl font-bold mb-4 text-center">
+            <h2 className="text-xl font-bold mb-4 text-center underline">
               ANOMALI PERALATAN GARDU INDUK
             </h2>
             <div className="h-96">
@@ -154,7 +154,7 @@ const Dashboard = () => {
         </div>
         <div className="w-full max-w-6xl mx-auto p-4">
           <div className="bg-white rounded-lg shadow-lg p-6">
-            <h2 className="text-xl font-bold mb-4 text-center">
+            <h2 className="text-xl font-bold mb-4 text-center underline">
               ANOMALI PERALATAN PROTEKSI
             </h2>
             <div className="h-96">
@@ -183,7 +183,7 @@ const Dashboard = () => {
         </div>
         <div className="w-full max-w-6xl mx-auto p-4">
           <div className="bg-white rounded-lg shadow-lg p-6">
-            <h2 className="text-xl font-bold mb-4 text-center">
+            <h2 className="text-xl font-bold mb-4 text-center underline">
               ANOMALI JARINGAN
             </h2>
             <div className="h-96">
@@ -212,7 +212,7 @@ const Dashboard = () => {
         </div>
         <div className="w-full max-w-6xl mx-auto p-4">
           <div className="bg-white rounded-lg shadow-lg p-6">
-            <h2 className="text-xl font-bold mb-4 text-center">
+            <h2 className="text-xl font-bold mb-4 text-center underline">
               Tabel Summary
             </h2>
             <SummaryTableAnomaliGardu />
@@ -220,7 +220,7 @@ const Dashboard = () => {
         </div>
         <div className="w-full max-w-6xl mx-auto p-4">
           <div className="bg-white rounded-lg shadow-lg p-6">
-            <h2 className="text-xl font-bold mb-4 text-center">
+            <h2 className="text-xl font-bold mb-4 text-center underline">
               Tabel Summary
             </h2>
             <SummaryTableAnomaliJaringan />
@@ -228,7 +228,7 @@ const Dashboard = () => {
         </div>
         <div className="w-full max-w-6xl mx-auto p-4">
           <div className="bg-white rounded-lg shadow-lg p-6">
-            <h2 className="text-xl font-bold mb-4 text-center">
+            <h2 className="text-xl font-bold mb-4 text-center underline">
               Tabel Summary
             </h2>
             <SummaryTableAnomaliProteksi />

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 "use client";
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router"; 
@@ -56,11 +57,11 @@ const Sidebar = () => {
       icon: ChartNetworkIcon,
       href: "/anomali-jaringan",
     },
-    {
-      name: "Gardu Induk",
-      icon: TowerControl,
-      href: "/gardu-induk",
-    }
+    // {
+    //   name: "Gardu Induk",
+    //   icon: TowerControl,
+    //   href: "/gardu-induk",
+    // }
   ];
   const handleLogout = async () => {
     await supabase.auth.signOut();

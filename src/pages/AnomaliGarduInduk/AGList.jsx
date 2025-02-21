@@ -153,7 +153,7 @@ const AGList = () => {
   return (
     <Card className="">
       <CardHeader floated={false} shadow={false} className="rounded-none">
-        <div className="mb-8 flex items-center justify-between gap-8">
+        <div className="mb-8 flex flex-wrap items-center justify-between gap-8">
           <div>
             <Typography variant="h2" color="blue-gray">
               Anomali Gardu Induk
@@ -908,7 +908,7 @@ const AGList = () => {
                 </td>
                 <td
                   className={`p-4 border-b border-blue-gray-50 ${
-                    row.status_anomali === "CLOSE" ? "bg-green-100" : ""
+                    row.status_anomali === "CLOSED" ? "bg-green-100" : ""
                   }`}
                 >
                   {editingId === row.id ? (
@@ -917,9 +917,9 @@ const AGList = () => {
                       value={editData.status_anomali || ""}
                       onChange={(e) => handleChange("status_anomali", e)}
                     >
-                      <Option key="close" value="CLOSE">
+                      <Option key="closed" value="CLOSED">
                         {" "}
-                        CLOSE{" "}
+                        CLOSED{" "}
                       </Option>
                       <Option key="open" value="OPEN">
                         {" "}

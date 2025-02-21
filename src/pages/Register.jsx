@@ -46,7 +46,7 @@ const Register = () => {
     <div className="container-login-page">
       <Card
         shadow={false}
-        className="md:px-24 md:py-14 py-8 border border-gray-300 w-1/2 mx-auto my-auto mt-20"
+        className="mx-auto my-auto lg:mt-20 md:w-1/2 sm:w-1/2"
       >
         <CardHeader shadow={false} floated={false} className="text-center">
           <Typography
