@@ -223,7 +223,7 @@ const Dashboard = () => {
             <h2 className="text-xl font-bold mb-4 text-center underline">
               Tabel Summary
             </h2>
-            <SummaryTableAnomaliJaringan />
+            <SummaryTableAnomaliProteksi />
           </div>
         </div>
         <div className="w-full max-w-6xl mx-auto p-4">
@@ -231,7 +231,7 @@ const Dashboard = () => {
             <h2 className="text-xl font-bold mb-4 text-center underline">
               Tabel Summary
             </h2>
-            <SummaryTableAnomaliProteksi />
+            <SummaryTableAnomaliJaringan />
           </div>
         </div>
       </CardBody>
