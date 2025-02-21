@@ -1,6 +1,3 @@
-/* eslint-disable no-unused-vars */
-import { supabase } from "../utils/supabaseClient";
-import { useEffect, useState } from "react";
 import {
   Card,
   CardBody,
@@ -11,19 +8,19 @@ import {
 import {
   LineChartTrenPenurunanTotalAnomaliperBulan,
   PenurunanTotalAnomaliperBulan,
-} from "../component/InfoGrafis.jsx/PenurunanTotalAnomaliperBulan";
+} from "../component/InfoGrafis/PenurunanTotalAnomaliperBulan";
 import {
   LineChartTrenPenurunanperBidang,
   PenurunanperBidang,
-} from "../component/InfoGrafis.jsx/PenurunanPerBidang";
+} from "../component/InfoGrafis/PenurunanPerBidang";
 import {
   AnomaliClosedBarChart,
   AnomaliClosedperBulan,
-} from "../component/InfoGrafis.jsx/AnomaliClosedperBulan";
+} from "../component/InfoGrafis/AnomaliClosedperBulan";
 import {
   ProgresBarChart,
   ProgresperJenisAnomali,
-} from "../component/InfoGrafis.jsx/ProgresperJenisAnomali";
+} from "../component/InfoGrafis/ProgresperJenisAnomali";
 
 const InfoGrafis = () => {
  
