@@ -36,7 +36,7 @@ const SummaryTableAnomaliGardu = () => {
         if (curr.status_anomali.toLowerCase() === 'open') {
           acc[category].open += 1;
           acc[category].total += 1;
-        } else if (curr.status_anomali.toLowerCase() === 'close') {
+        } else if (curr.status_anomali.toLowerCase() === 'closed') {
           acc[category].closed += 1;
           acc[category].total += 1;
         }
