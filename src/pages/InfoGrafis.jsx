@@ -8,17 +8,17 @@ import {
 import {
   LineChartTrenPenurunanTotalAnomaliperBulan,
   PenurunanTotalAnomaliperBulan,
-} from "../component/InfoGrafis/PenurunanTotalAnomaliperBulan";
-import { LineChartTrenPenurunanperBidang } from "../component/InfoGrafis/PenurunanPerBidang";
-import { PenurunanperBidang } from "../component/InfoGrafis/PenurunanPerBidang";
+} from "../component/Infografik/PenurunanTotalAnomaliperBulan";
+import { LineChartTrenPenurunanperBidang } from "../component/Infografik/PenurunanperBidang";
+import { PenurunanperBidang } from "../component/Infografik/PenurunanperBidang";
 import {
   AnomaliClosedBarChart,
   AnomaliClosedperBulan,
-} from "../component/InfoGrafis/AnomaliClosedperBulan";
+} from "../component/Infografik/AnomaliClosedperBulan";
 import {
   ProgresBarChart,
   ProgresperJenisAnomali,
-} from "../component/InfoGrafis/ProgresperJenisAnomali";
+} from "../component/Infografik/ProgresperJenisAnomali";
 
 const InfoGrafis = () => {
  
