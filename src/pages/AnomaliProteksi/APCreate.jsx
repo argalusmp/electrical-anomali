@@ -257,7 +257,7 @@ const APCreate = () => {
             </div>
           </div>
 
-          <div className="kolom-span-date md:grid md:grid-cols-2 md:gap-10 grid grid-cols-1">
+          <div className="kolom-span-date md:grid md:grid-cols-3 md:gap-10 grid grid-cols-1">
             <div className="mb-3 flex flex-col">
               <Typography variant="h6" color="blue-gray" className="">
                 Tanggal Temuan
