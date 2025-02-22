@@ -68,7 +68,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div>
+    <div className="w-100% h-100%">
       <IconButton variant="text" size="lg" onClick={openDrawer}>
         {isDrawerOpen ? (
           <XMarkIcon className="h-8 w-8 stroke-2" />
@@ -84,13 +84,13 @@ const Sidebar = () => {
         >
           <div className="mb-2 flex items-center gap-4 p-4">
             <img
-              src="https://docs.material-tailwind.com/img/logo-ct-dark.png"
+              src="./img/Logo_PLN.png"
               alt="brand"
-              className="h-8 w-8"
+              className="w-3/4 h-full"
             />
-            <Typography variant="h5" color="blue-gray">
+            {/* <Typography variant="h5" color="blue-gray">
               PLN
-            </Typography>
+            </Typography> */}
           </div>
           <List>
             {navigation.map((item, index) => {

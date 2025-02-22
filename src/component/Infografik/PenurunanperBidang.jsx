@@ -66,26 +66,36 @@ export const PenurunanperBidang = () => {
   }, []);
 
   return (
-    <table className="min-w-full divide-y divide-gray-200">
-      <thead className="text-left">
-        <tr>
-          <th>Bulan</th>
-          <th>Gardu Induk</th>
-          <th>Proteksi</th>
-          <th>Jaringan</th>
-        </tr>
-      </thead>
-      <tbody className="text-left">
-        {data.map((row) => (
-          <tr key={row.bulan}>
-            <td>{row.bulan}</td>
-            <td>{row.garduinduk}</td>
-            <td>{row.proteksi}</td>
-            <td>{row.jaringan}</td>
+    <div className="overflow-x-auto">
+      <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+        <thead className=" bg-gray-50">
+          <tr className="font-bold text-center">
+            <th className="px-6 py-3  text-xs   uppercase tracking-wider border">
+              Bulan
+            </th>
+            <th className="px-6 py-3  text-xs   uppercase tracking-wider border">
+              Gardu Induk
+            </th>
+            <th className="px-6 py-3  text-xs   uppercase tracking-wider border">
+              Proteksi
+            </th>
+            <th className="px-6 py-3  text-xs   uppercase tracking-wider border">
+              Jaringan
+            </th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody className="text-center bg-white divide-y divide-gray-200">
+          {data.map((row) => (
+            <tr key={row.bulan} >
+              <td className="text-left px-6 py-4 whitespace-nowrap text-sm text-gray-900 border">{row.bulan}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 border">{row.garduinduk}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 border">{row.proteksi}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 border">{row.jaringan}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 };
 

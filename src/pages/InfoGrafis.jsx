@@ -38,22 +38,7 @@ const InfoGrafis = () => {
         </div>
       </CardHeader>
       <CardBody className="grid grid-cols-1 gap-4 "  >
-        <div className="w-full max-w-6xl mx-auto p-4 overflow-x">
-          <div className="bg-white rounded-lg shadow-light-blue-200 shadow-xl p-6">
-            <h2 className="text-xl font-bold mb-4 text-center underline">
-              Penurunan Total Anomali per Bulan
-            </h2>
-            <PenurunanTotalAnomaliperBulan />
-          </div>
-        </div>
-        <div className="w-full max-w-6xl mx-auto p-4 ">
-          <div className="bg-white rounded-lg shadow-light-blue-200 shadow-xl p-6">
-            <h2 className="text-xl font-bold mb-4 text-center underline">
-              Line Chart Penurunan Total Anomali per Bulan
-            </h2>
-            <LineChartTrenPenurunanTotalAnomaliperBulan />
-          </div>
-        </div>
+        
         <div className="w-full max-w-6xl mx-auto p-4">
           <div className="bg-white rounded-lg shadow-light-blue-200 shadow-xl p-6">
             <h2 className="text-xl font-bold mb-4 text-center underline">
@@ -68,6 +53,22 @@ const InfoGrafis = () => {
               Line Chart Penurunan per Bidang
             </h2>
             <LineChartTrenPenurunanperBidang />
+          </div>
+        </div>
+        <div className="w-full max-w-6xl mx-auto p-4 overflow-x">
+          <div className="bg-white rounded-lg shadow-light-blue-200 shadow-xl p-6">
+            <h2 className="text-xl font-bold mb-4 text-center underline">
+              Penurunan Total Anomali per Bulan
+            </h2>
+            <PenurunanTotalAnomaliperBulan />
+          </div>
+        </div>
+        <div className="w-full max-w-6xl mx-auto p-4 ">
+          <div className="bg-white rounded-lg shadow-light-blue-200 shadow-xl p-6">
+            <h2 className="text-xl font-bold mb-4 text-center underline">
+              Line Chart Penurunan Total Anomali per Bulan
+            </h2>
+            <LineChartTrenPenurunanTotalAnomaliperBulan />
           </div>
         </div>
         <div className="w-full max-w-6xl mx-auto p-4">
