@@ -2,8 +2,24 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { supabase } from "../../utils/supabaseClient";
 import Loading from "../../component/Loading";
-import { Button, Card, CardBody, CardFooter, CardHeader, Checkbox, Input, Option, Select, Typography } from "@material-tailwind/react";
-import { KategoriAnomali, Pelaksana, Phasa } from "../../utils/ConstWord";
+import {
+  Button,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Checkbox,
+  Input,
+  Option,
+  Select,
+  Typography,
+} from "@material-tailwind/react";
+import {
+  KategoriAnomali,
+  NAMA_BULAN,
+  Pelaksana,
+  Phasa,
+} from "../../utils/ConstWord";
 import { Datepicker } from "flowbite-react";
 import { Plus } from "lucide-react";
 
@@ -498,15 +514,23 @@ const APCreate = () => {
               </div>
               <div className="mb-3 flex flex-col">
                 <Typography variant="h6" color="blue-gray" className="">
-                  Tanggal Selesai
+                  Bulan Selesai
                 </Typography>
-                <Datepicker
-                  label="Tanggal Selesai"
+                <Select
+                  label="Bulan Selesai"
+                  className=""
+                  size="lg"
                   value={bulanSelesai}
-                  onChange={(date) => {
-                    setBulanSelesai(date);
+                  onChange={(e) => {
+                    setBulanSelesai(e);
                   }}
-                />
+                >
+                  {NAMA_BULAN.map(({ label, value }) => (
+                    <Option key={label.toLowerCase()} value={value}>
+                      {value}{" "}
+                    </Option>
+                  ))}
+                </Select>
               </div>
             </div>
           </div>

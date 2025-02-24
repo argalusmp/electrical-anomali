@@ -25,6 +25,7 @@ const extractMonth = (dateString) => {
 
 export const AnomaliClosedperBulan = () => {
   const [data, setData] = useState([]);
+  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,73 +45,106 @@ export const AnomaliClosedperBulan = () => {
       ]);
 
       const monthlyData = Array.from({ length: 12 }, (_, i) => ({
-        bulan: new Date(2024, i).toLocaleString("id-ID", { month: "long" }),
+        bulan: new Date(selectedYear, i).toLocaleString("id-ID", {
+          month: "long",
+        }),
         garduinduk: 0,
         proteksi: 0,
         jaringan: 0,
       }));
 
-      // Count closed anomalies per month for each type
       [garduinduk.data, proteksi.data, jaringan.data].forEach(
         (dataset, index) => {
           const field = ["garduinduk", "proteksi", "jaringan"][index];
           dataset.forEach((item) => {
-            const month = extractMonth(item.bulan_selesai) - 1;
-            monthlyData[month][field]++;
+            const itemDate = new Date(item.tanggal_realisasi);
+            if (itemDate.getFullYear() === selectedYear) {
+              const month = itemDate.getMonth();
+              monthlyData[month][field]++;
+            }
           });
         }
       );
+
+      // Count closed anomalies per month for each type no filter
+      // [garduinduk.data, proteksi.data, jaringan.data].forEach(
+      //   (dataset, index) => {
+      //     const field = ["garduinduk", "proteksi", "jaringan"][index];
+      //     dataset.forEach((item) => {
+      //       const month = extractMonth(item.tanggal_realisasi) - 1;
+      //       monthlyData[month][field]++;
+      //     });
+      //   }
+      // );
 
       setData(monthlyData);
     };
 
     fetchData();
-  }, []);
+  }, [selectedYear]);
 
   return (
-    <div className="overflow-x-auto ">
-      <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
-        <thead className=" bg-gray-50">
-          <tr className="font-bold text-center">
-            <th className="px-6 py-3  text-xs   uppercase tracking-wider border">
-              Bulan
-            </th>
-            <th className="px-6 py-3  text-xs   uppercase tracking-wider border">
-              Gardu Induk
-            </th>
-            <th className="px-6 py-3  text-xs   uppercase tracking-wider border">
-              Proteksi
-            </th>
-            <th className="px-6 py-3  text-xs   uppercase tracking-wider border">
-              Jaringan
-            </th>
-          </tr>
-        </thead>
-        <tbody className="text-center bg-white divide-y divide-gray-200">
-          {data.map((row) => (
-            <tr key={row.bulan}>
-              <td className="text-left px-6 py-4 whitespace-nowrap text-sm text-gray-900 border">
-                {row.bulan}
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 border">
-                {row.garduinduk}
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 border">
-                {row.proteksi}
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 border">
-                {row.jaringan}
-              </td>
-            </tr>
+    <div>
+      <div className="flex justify-end mb-4">
+        <label className="mr-2 my-auto">Pilih Tahun:</label>
+        <select
+          value={selectedYear}
+          onChange={(e) => setSelectedYear(Number(e.target.value))}
+          className="border rounded px-2 py-1"
+        >
+          {[2023, 2024, 2025].map((year) => (
+            <option key={year} value={year}>
+              {year}
+            </option>
           ))}
-        </tbody>
-      </table>
+        </select>
+      </div>
+
+      <div className="overflow-x-auto ">
+        <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+          <thead className=" bg-gray-50">
+            <tr className="font-bold text-center">
+              <th className="px-6 py-3 text-xs uppercase tracking-wider border">
+                Bulan
+              </th>
+              <th className="px-6 py-3 text-xs uppercase tracking-wider border">
+                Gardu Induk
+              </th>
+              <th className="px-6 py-3 text-xs uppercase tracking-wider border">
+                Proteksi
+              </th>
+              <th className="px-6 py-3 text-xs uppercase tracking-wider border">
+                Jaringan
+              </th>
+            </tr>
+          </thead>
+          <tbody className="text-center bg-white divide-y divide-gray-200">
+            {data.map((row) => (
+              <tr key={row.bulan}>
+                <td className="text-left px-6 py-4 whitespace-nowrap text-sm text-gray-900 border">
+                  {row.bulan}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 border">
+                  {row.garduinduk}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 border">
+                  {row.proteksi}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 border">
+                  {row.jaringan}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
 
 export const AnomaliClosedBarChart = () => {
   const [data, setData] = useState([]);
+  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
 
   useEffect(() => {
     const fetchData = async () => {
@@ -151,32 +185,62 @@ export const AnomaliClosedBarChart = () => {
         "GARDU INDUK": 0,
       }));
 
-      // Process gardu induk data
-      garduinduk.data.forEach((item) => {
-        const month = new Date(item.bulan_selesai).getMonth();
-        monthlyData[month]["GARDU INDUK"]++;
-      });
+      // BEFOREE
+      // // Process gardu induk data
+      // garduinduk.data.forEach((item) => {
+      //   const month = new Date(item.tanggal_realisasi).getMonth();
+      //   monthlyData[month]["GARDU INDUK"]++;
+      // });
 
-      // Process proteksi data
-      proteksi.data.forEach((item) => {
-        const month = new Date(item.bulan_selesai).getMonth();
-        monthlyData[month]["SISTEM PROTEKSI"]++;
-      });
+      // // Process proteksi data
+      // proteksi.data.forEach((item) => {
+      //   const month = new Date(item.tanggal_realisasi).getMonth();
+      //   monthlyData[month]["SISTEM PROTEKSI"]++;
+      // });
 
-      // Process jaringan data
-      jaringan.data.forEach((item) => {
-        const month = new Date(item.bulan_selesai).getMonth();
-        monthlyData[month]["JARINGAN TRANSMISI"]++;
-      });
+      // // Process jaringan data
+      // jaringan.data.forEach((item) => {
+      //   const month = new Date(item.tanggal_realisasi).getMonth();
+      //   monthlyData[month]["JARINGAN TRANSMISI"]++;
+      // });
+
+      // AFTER
+      const processData = (items, key) => {
+        items.data.forEach((item) => {
+          const date = new Date(item.tanggal_realisasi);
+          if (date.getFullYear() === selectedYear) {
+            const month = date.getMonth();
+            monthlyData[month][key]++;
+          }
+        });
+      };
+
+      processData(garduinduk, "GARDU INDUK");
+      processData(proteksi, "SISTEM PROTEKSI");
+      processData(jaringan, "JARINGAN TRANSMISI");
 
       setData(monthlyData);
     };
 
     fetchData();
-  }, []);
+  }, [selectedYear]);
 
   return (
     <div className="w-full">
+      <div className="flex justify-end mb-4">
+        <label className="mr-2 my-auto">Pilih Tahun:</label>
+        <select
+          value={selectedYear}
+          onChange={(e) => setSelectedYear(Number(e.target.value))}
+          className="border rounded px-2 py-1"
+        >
+          {[2023, 2024, 2025].map((year) => (
+            <option key={year} value={year}>
+              {year}
+            </option>
+          ))}
+        </select>
+      </div>
       <ResponsiveContainer width="100%" height={400}>
         <BarChart
           data={data}

@@ -16,7 +16,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { supabase } from "../../utils/supabaseClient";
 import { Plus } from "lucide-react";
-import { Phasa, KategoriAnomali, Pelaksana } from "../../utils/ConstWord";
+import { Phasa, KategoriAnomali, Pelaksana, NAMA_BULAN } from "../../utils/ConstWord";
 import Loading from "../../component/Loading";
 
 const AGCreate = () => {
@@ -515,15 +515,23 @@ const AGCreate = () => {
               </div>
               <div className="mb-3 flex flex-col">
                 <Typography variant="h6" color="blue-gray" className="">
-                  Tanggal Selesai
+                  Bulan Selesai
                 </Typography>
-                <Datepicker
-                  label="Tanggal Selesai"
+                  <Select
+                  label="Bulan Selesai"
+                  className=""
+                  size="lg"
                   value={bulanSelesai}
-                  onChange={(date) => {
-                    setBulanSelesai(date);
+                  onChange={(e) => {
+                    setBulanSelesai(e);
                   }}
-                />
+                >
+                  {NAMA_BULAN.map(({ label, value }) => (
+                    <Option key={label.toLowerCase()} value={value}>
+                      {value}{" "}
+                    </Option>
+                  ))}
+                </Select>
               </div>
             </div>
           </div>

@@ -2,9 +2,39 @@ import { useNavigate } from "react-router";
 import { supabase } from "../../utils/supabaseClient";
 import { useState, useEffect } from "react";
 import Loading from "../../component/Loading";
-import { Button, Card, CardBody, CardFooter, CardHeader, Checkbox, Chip, IconButton, Input, Option, Select, Tab, Tabs, TabsHeader, Tooltip, Typography } from "@material-tailwind/react";
-import { CheckIcon, PencilIcon, Trash2Icon, UserPlusIcon, XIcon } from "lucide-react";
-import { getColor, KategoriAnomali, Pelaksana, Phasa, TABS } from "../../utils/ConstWord";
+import {
+  Button,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Checkbox,
+  Chip,
+  IconButton,
+  Input,
+  Option,
+  Select,
+  Tab,
+  Tabs,
+  TabsHeader,
+  Tooltip,
+  Typography,
+} from "@material-tailwind/react";
+import {
+  CheckIcon,
+  PencilIcon,
+  Trash2Icon,
+  UserPlusIcon,
+  XIcon,
+} from "lucide-react";
+import {
+  getColor,
+  KategoriAnomali,
+  Pelaksana,
+  Phasa,
+  TABS,
+  NAMA_BULAN,
+} from "../../utils/ConstWord";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import { Datepicker } from "flowbite-react";
 
@@ -56,6 +86,13 @@ const APList = () => {
       const filteredData = searchTerm
         ? anomali_proteksi.filter(
             (row) =>
+              row.garduinduk.name
+                .toLowerCase()
+                .includes(searchTerm.toLowerCase()) ||
+              row.phasa.toLowerCase().includes(searchTerm.toLowerCase()) ||
+              row.anomali_mayor_minor
+                .toLowerCase()
+                .includes(searchTerm.toLowerCase()) ||
               row.permasalahan
                 .toLowerCase()
                 .includes(searchTerm.toLowerCase()) ||
@@ -856,20 +893,17 @@ const APList = () => {
                 </td>
                 <td className="p-4 border-b border-blue-gray-50">
                   {editingId === row.id ? (
-                    <Datepicker
-                      label="Jadwal Selesai"
-                      value={
-                        editData.bulan_selesai
-                          ? new Date(editData.bulan_selesai)
-                          : new Date()
-                      }
-                      onChange={(date) =>
-                        handleChange(
-                          "bulan_selesai",
-                          date ? date.toISOString().split("T")[0] : ""
-                        )
-                      }
-                    />
+                    <Select
+                      label="Bulan Selesai "
+                      value={editData.bulan_selesai || ""}
+                      onChange={(e) => handleChange("bulan_selesai", e)}
+                    >
+                      {NAMA_BULAN.map(({ label, value }) => (
+                        <Option key={value} value={value}>
+                          {label}
+                        </Option>
+                      ))}
+                    </Select>
                   ) : (
                     <Typography
                       variant="small"

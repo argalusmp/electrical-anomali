@@ -162,3 +162,47 @@ export const TABS = [
     value: "OPEN",
   },
 ];
+
+
+export const NAMA_BULAN = [
+  {
+    label: "JAN",
+    value: "JAN",
+  },
+  {
+    label: "FEB",
+    value: "FEB",
+  },
+  {
+    label: "MAR",
+    value: "MAR",
+  },
+  {
+    label: "APR",
+    value: "APR",
+  },{
+    label: "MEI",
+    value: "MEI",
+  },{
+    label: "JUN",
+    value: "JUN",
+  },{
+    label: "JUL",
+    value: "JUL",
+  },{
+    label: "AGS",
+    value: "AGS",
+  },{
+    label: "SEP",
+    value: "SEP",
+  },{
+    label: "OKT",
+    value: "OKT",
+  },{
+    label: "NOV",
+    value: "NOV",
+  },{
+    label: "DES",
+    value: "DES",
+  },
+];

@@ -113,7 +113,7 @@ const Dashboard = () => {
       <CardHeader floated={false} shadow={false} className="rounded-none">
         <div className="mb-8  items-center justify-between gap-8">
           <div>
-            <Typography variant="h2" color="blue-gray" className="text-center">
+            <Typography variant="h2" color="blue-gray" className="text-center text-light-blue-500">
               Dashboard Monitoring
             </Typography>
             <Typography color="gray" className="mt-1 font-normal text-center">

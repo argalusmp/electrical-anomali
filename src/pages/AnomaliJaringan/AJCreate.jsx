@@ -12,9 +12,9 @@ import {
   Button,
   Input,
   CardFooter,
-  Checkbox
+  Checkbox,
 } from "@material-tailwind/react";
-import { KategoriAnomali } from "../../utils/ConstWord";
+import { KategoriAnomali, NAMA_BULAN } from "../../utils/ConstWord";
 import { Datepicker } from "flowbite-react";
 import { Plus } from "lucide-react";
 
@@ -402,7 +402,7 @@ const AJCreate = () => {
                   color="blue"
                   value={realisasiRab}
                   onChange={(e) => {
-                    setRealisasiRab(e.target.checked);  
+                    setRealisasiRab(e.target.checked);
                   }}
                 />
               </div>
@@ -490,15 +490,23 @@ const AJCreate = () => {
               </div>
               <div className="mb-3 flex flex-col">
                 <Typography variant="h6" color="blue-gray" className="">
-                  Tanggal Selesai
+                  Bulan Selesai
                 </Typography>
-                <Datepicker
-                  label="Tanggal Selesai"
+                <Select
+                  label="Bulan Selesai"
+                  className=""
+                  size="lg"
                   value={bulanSelesai}
-                  onChange={(date) => {
-                    setBulanSelesai(date);
+                  onChange={(e) => {
+                    setBulanSelesai(e);
                   }}
-                />
+                >
+                  {NAMA_BULAN.map(({ label, value }) => (
+                    <Option key={label.toLowerCase()} value={value}>
+                      {value}{" "}
+                    </Option>
+                  ))}
+                </Select>
               </div>
             </div>
           </div>
