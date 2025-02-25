@@ -132,7 +132,7 @@ const Register = () => {
               Already have an account ?{" "}
               <span className="text-blue-600">
                 {" "}
-                <Link to="/register">Register</Link>
+                <Link to="/login">Login</Link>
               </span>
             </Typography>
           </div>
