@@ -8,7 +8,7 @@ import {
   CardHeader,
   Typography,
 } from "@material-tailwind/react";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { supabase } from "../utils/supabaseClient";
 import { useEffect } from "react";
 
@@ -141,7 +141,8 @@ const LoginPage = () => {
               color="blue-gray"
               className="block font-medium mb-2"
             >
-              Don't have an account ? <span className="text-blue-600"> <a href="/register" >Register</a></span>
+              Don't have an account ? <span className="text-blue-600"> {" "}
+                <Link to="/register">Register</Link></span>
             </Typography>
           </div>
         </CardBody>
