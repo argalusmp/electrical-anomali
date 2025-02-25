@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { supabase } from "../utils/supabaseClient";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { Button, Card, CardBody, CardHeader, Input, Typography } from "@material-tailwind/react";
 import { useEffect } from "react";
 
@@ -132,7 +132,7 @@ const Register = () => {
               Already have an account ?{" "}
               <span className="text-blue-600">
                 {" "}
-                <a href="/login">Login</a>
+                <Link to="/register">Register</Link>
               </span>
             </Typography>
           </div>
