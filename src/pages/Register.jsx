@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { supabase } from "../utils/supabaseClient";
 import { useNavigate } from "react-router";
 import { Button, Card, CardBody, CardHeader, Input, Typography } from "@material-tailwind/react";
 import { useEffect } from "react";
+import { useAuth } from "../context/AuthContext";
+import PasswordInput from "../component/PasswordInput";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -10,28 +11,19 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const { register, session } = useAuth();
 
   useEffect(() => {
-    const checkSession = async () => {
-      const { data } = await supabase.auth.getSession();
-      if (data.session) {
-        navigate("/"); // Redirect ke dashboard jika sudah login
-      }
-      setLoading(false);
-    };
-
-    checkSession();
-  }, [navigate]);
-
+    if (session) {
+      navigate("/"); // Redirect ke dashboard jika sudah login
+    }
+  }, [session, navigate]);
   const handleRegister = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
 
-    const { user, error } = await supabase.auth.signUp({
-      email,
-      password,
-    });
+    const { data, error } = await register(email, password);
 
     if (error) {
       setError(error.message);
@@ -41,103 +33,139 @@ const Register = () => {
 
     setLoading(false);
   };
-
   return (
-    <div className="container-login-page">
-      <Card
-        shadow={false}
-        className="mx-auto my-auto lg:mt-20 md:w-1/2 sm:w-1/2"
-      >
-        <CardHeader shadow={false} floated={false} className="text-center">
-          <Typography
-            variant="h1"
-            color="blue-gray"
-            className="mb-4 !text-3xl lg:text-4xl"
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-100 flex items-center justify-center p-4">
+      <div className="w-full max-w-md">
+        {/* Logo PLN */}
+        <div className="text-center mb-8">
+          <img 
+            src="/img/Logo_PLN.png" 
+            alt="PLN Logo" 
+            className="h-16 mx-auto mb-4"
+          />
+          <h1 className="text-2xl font-bold text-gray-800 mb-2">
+            Power Anomali Report
+          </h1>
+          <p className="text-gray-600 text-sm">
+            Buat Akun Baru untuk Sistem Monitoring Anomali PLN
+          </p>
+        </div>
+
+        <Card 
+          shadow={true}
+          className="bg-white/80 backdrop-blur-sm border-0 shadow-xl"
+        >
+          <CardHeader 
+            shadow={false} 
+            floated={false} 
+            className="text-center bg-transparent pb-4"
           >
-            Register
-          </Typography>
-          {error && <p className="text-red-500">{error}</p>}
-          {/* <Typography className="!text-gray-600 text-[18px] font-normal md:max-w-sm">
-        Jaya jaya jaya.
-      </Typography> */}
-        </CardHeader>
-        <CardBody>
-          <form
-            onSubmit={handleRegister}
-            action="#"
-            className="flex flex-col gap-4"
-          >
-            <div>
-              <label htmlFor="email">
-                <Typography
-                  variant="small"
-                  color="blue-gray"
-                  className="block font-medium mb-2"
-                >
-                  Set your Email
-                </Typography>
-              </label>
-              <Input
-                id="email"
-                color="gray"
-                size="lg"
-                type="email"
-                name="email"
-                placeholder="name@mail.com"
-                className="!w-full placeholder:!opacity-100 focus:!border-t-primary !border-t-blue-gray-200 text-black"
-                labelProps={{
-                  className: "hidden",
-                }}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="password">
-                <Typography
-                  variant="small"
-                  color="blue-gray"
-                  className="block font-medium mb-2"
-                >
-                  Create Your Password
-                </Typography>
-              </label>
-              <Input
-                id="password"
-                color="gray"
-                size="lg"
-                type="password"
-                name="password"
-                placeholder="xxxxxxxxxxxx"
-                className="!w-full placeholder:!opacity-100 focus:!border-t-primary !border-t-blue-gray-200"
-                labelProps={{
-                  className: "hidden",
-                }}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </div>
-            <Button size="lg" color="gray" fullWidth type="submit">
-              {loading ? "Loading..." : "Register"}
-            </Button>
-          </form>
-          <div className="toRegister mt-3">
             <Typography
-              variant="small"
+              variant="h4"
               color="blue-gray"
-              className="block font-medium mb-2"
+              className="font-semibold text-gray-800"
             >
-              Already have an account ?{" "}
-              <span className="text-blue-600">
-                {" "}
-                <a href="/login">Login</a>
-              </span>
+              Daftar Akun Baru
             </Typography>
-          </div>
-        </CardBody>
-      </Card>
+            <Typography 
+              variant="small" 
+              className="text-gray-600 mt-2 font-normal"
+            >
+              Silakan isi informasi Anda untuk membuat akun
+            </Typography>
+            {error && (
+              <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+                <span className="text-red-600 text-sm">{error}</span>
+              </div>
+            )}          </CardHeader>
+          
+          <CardBody className="px-8 py-6">
+            <form
+              onSubmit={handleRegister}
+              className="space-y-6"
+            >
+              <div className="space-y-2">
+                <label htmlFor="email">
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="font-medium text-gray-700"
+                  >
+                    Email Address
+                  </Typography>
+                </label>
+                <Input
+                  id="email"
+                  color="green"
+                  size="lg"
+                  type="email"
+                  name="email"
+                  placeholder="contoh@email.com"
+                  className="!border-gray-300 focus:!border-green-500 !bg-white"
+                  labelProps={{
+                    className: "hidden",
+                  }}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <label htmlFor="password">
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="font-medium text-gray-700"
+                  >
+                    Password
+                  </Typography>
+                </label>
+                <PasswordInput
+                  id="password"
+                  name="password"
+                  placeholder="Buat password yang kuat"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </div>
+              
+              <Button 
+                size="lg" 
+                className="bg-green-600 hover:bg-green-700 transition-colors duration-200 shadow-lg" 
+                fullWidth 
+                type="submit"
+                disabled={loading}
+              >
+                {loading ? (
+                  <div className="flex items-center justify-center">
+                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                    Mendaftar...
+                  </div>
+                ) : (
+                  "Daftar"
+                )}
+              </Button>
+            </form>
+            
+            <div className="mt-6 text-center">
+              <Typography
+                variant="small"
+                className="text-gray-600"
+              >
+                Sudah punya akun?{" "}
+                <a 
+                  href="/login" 
+                  className="text-green-600 hover:text-green-700 font-medium hover:underline transition-colors"
+                >
+                  Masuk di sini
+                </a>
+              </Typography>
+            </div>
+          </CardBody>
+        </Card>
+      </div>
     </div>
   );
 };

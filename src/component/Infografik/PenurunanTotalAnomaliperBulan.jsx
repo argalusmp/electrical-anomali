@@ -22,11 +22,11 @@ const YearFilter = ({ selectedYear, onYearChange }) => {
 
   return (
     <div className="mb-4 flex justify-end">
-      <label className="mr-2 my-auto">Pilih Tahun:</label>
+      <label className="mr-2 my-auto text-sm font-medium text-gray-700">Pilih Tahun:</label>
       <select
         value={selectedYear}
         onChange={(e) => onYearChange(parseInt(e.target.value))}
-        className="border rounded px-2 py-1"
+        className="border border-gray-300 rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
       >
         {years.map((year) => (
           <option key={year} value={year}>
@@ -114,35 +114,42 @@ export const PenurunanTotalAnomaliperBulan = () => {
 
     fetchData();
   }, [selectedYear]);
-
   return (
     <div className="space-y-4">
       <YearFilter selectedYear={selectedYear} onYearChange={setSelectedYear} />
-      <div className="overflow-x-auto">
-        <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
-          <thead className="bg-gray-50">
-            <tr className="font-bold text-center">
-              <th className="px-6 py-3 text-xs uppercase tracking-wider border">
-                Bulan
-              </th>
-              <th className="px-6 py-3 text-xs uppercase tracking-wider border">
-                Total Anomali
-              </th>
-            </tr>
-          </thead>
-          <tbody className="text-center bg-white divide-y divide-gray-200">
-            {data.map((row) => (
-              <tr key={row.bulan}>
-                <td className="text-left px-6 py-4 whitespace-nowrap text-sm text-gray-900 border">
-                  {row.bulan}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 border">
-                  {row.anomali}
-                </td>
+      <div className="overflow-hidden rounded-lg border border-gray-200 shadow-sm">
+        <div className="overflow-x-auto">
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-gradient-to-r from-blue-50 to-indigo-50">
+              <tr>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                  Bulan
+                </th>
+                <th className="px-4 py-3 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                  <span className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-blue-100 text-blue-800">
+                    Total Anomali
+                  </span>
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {data.map((row, index) => (
+                <tr key={row.bulan} className="hover:bg-gray-50 transition-colors duration-150">
+                  <td className="px-4 py-3 text-sm font-medium text-gray-900">
+                    {row.bulan}
+                  </td>
+                  <td className="px-4 py-3 text-center">
+                    <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
+                      row.anomali > 0 ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-600'
+                    }`}>
+                      {row.anomali}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

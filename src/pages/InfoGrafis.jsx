@@ -22,89 +22,124 @@ import {
 
 const InfoGrafis = () => {
  
-
   return (
-    <Card>
-      <CardHeader floated={false} shadow={false} className="rounded-none">
-        <div className="mb-8  items-center justify-between gap-8  mx-9 ">
-          <div>
-            <Typography variant="h2" color="blue-gray" className="text-center text-light-blue-500">
-              INFO GRAFIK
+    <div className="min-h-screen bg-gray-50">
+      {/* Header Section */}
+      <div className="bg-white shadow-sm border-b">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="text-center">
+            <Typography variant="h3" className="font-bold text-gray-900 mb-2">
+              Infografis Monitoring Anomali
             </Typography>
-            <Typography color="gray" className="mt-1 font-normal text-center">
-              Berikut monitoring via Infografis
+            <Typography className="text-gray-600 text-lg">
+              Visualisasi data dan tren anomali sistem PLN
             </Typography>
           </div>
         </div>
-      </CardHeader>
-      <CardBody className="grid grid-cols-1 gap-8 "  >
-        <div className="w-full max-w-8xl mx-auto p-4 overflow-x">
-          <div className="bg-white rounded-lg shadow-light-blue-200 shadow-xl p-6">
-            <h2 className="text-xl font-bold mb-4 text-center underline">
-              Penurunan Total Anomali per Bulan
-            </h2>
-            <PenurunanTotalAnomaliperBulan />
-          </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+          
+          {/* Penurunan Total Anomali per Bulan */}
+          <Card className="shadow-lg border-0 hover:shadow-xl transition-shadow duration-300">
+            <CardHeader className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white">
+              <Typography variant="h6" className="font-semibold text-center">
+                📊 Penurunan Total Anomali per Bulan
+              </Typography>
+            </CardHeader>
+            <CardBody className="p-6">
+              <PenurunanTotalAnomaliperBulan />
+            </CardBody>
+          </Card>
+
+          {/* Line Chart Penurunan Total Anomali per Bulan */}
+          <Card className="shadow-lg border-0 hover:shadow-xl transition-shadow duration-300">
+            <CardHeader className="bg-gradient-to-r from-purple-500 to-pink-600 text-white">
+              <Typography variant="h6" className="font-semibold text-center">
+                📈 Tren Penurunan Total Anomali per Bulan
+              </Typography>
+            </CardHeader>
+            <CardBody className="p-6">
+              <LineChartTrenPenurunanTotalAnomaliperBulan />
+            </CardBody>
+          </Card>
+
+          {/* Penurunan per Bidang */}
+          <Card className="shadow-lg border-0 hover:shadow-xl transition-shadow duration-300">
+            <CardHeader className="bg-gradient-to-r from-green-500 to-teal-600 text-white">
+              <Typography variant="h6" className="font-semibold text-center">
+                🏢 Penurunan per Bidang
+              </Typography>
+            </CardHeader>
+            <CardBody className="p-6">
+              <PenurunanperBidang />
+            </CardBody>
+          </Card>
+
+          {/* Line Chart Penurunan per Bidang */}
+          <Card className="shadow-lg border-0 hover:shadow-xl transition-shadow duration-300">
+            <CardHeader className="bg-gradient-to-r from-orange-500 to-red-600 text-white">
+              <Typography variant="h6" className="font-semibold text-center">
+                📉 Tren Penurunan per Bidang
+              </Typography>
+            </CardHeader>
+            <CardBody className="p-6">
+              <LineChartTrenPenurunanperBidang />
+            </CardBody>
+          </Card>
+
+          {/* Anomali Closed per Bulan */}
+          <Card className="shadow-lg border-0 hover:shadow-xl transition-shadow duration-300">
+            <CardHeader className="bg-gradient-to-r from-cyan-500 to-blue-600 text-white">
+              <Typography variant="h6" className="font-semibold text-center">
+                ✅ Anomali Closed per Bulan
+              </Typography>
+            </CardHeader>
+            <CardBody className="p-6">
+              <AnomaliClosedperBulan />
+            </CardBody>
+          </Card>
+
+          {/* Bar Anomali Closed per Bulan */}
+          <Card className="shadow-lg border-0 hover:shadow-xl transition-shadow duration-300">
+            <CardHeader className="bg-gradient-to-r from-lime-500 to-green-600 text-white">
+              <Typography variant="h6" className="font-semibold text-center">
+                📊 Chart Anomali Closed per Bulan
+              </Typography>
+            </CardHeader>
+            <CardBody className="p-6">
+              <AnomaliClosedBarChart />
+            </CardBody>
+          </Card>
+
+          {/* Progres per Jenis Anomali */}
+          <Card className="shadow-lg border-0 hover:shadow-xl transition-shadow duration-300">
+            <CardHeader className="bg-gradient-to-r from-red-900 to-pink-600 text-white">
+              <Typography variant="h6" className="font-semibold text-center">
+                🔄 Progres per Jenis Anomali
+              </Typography>
+            </CardHeader>
+            <CardBody className="p-6">
+              <ProgresperJenisAnomali />
+            </CardBody>
+          </Card>
+
+          {/* Bar Progres per Jenis Anomali */}
+          <Card className="shadow-lg border-0 hover:shadow-xl transition-shadow duration-300">
+            <CardHeader className="bg-gradient-to-r from-pink-500 to-purple-600 text-white">
+              <Typography variant="h6" className="font-semibold text-center">
+                📈 Chart Progres per Jenis Anomali
+              </Typography>
+            </CardHeader>
+            <CardBody className="p-6">
+              <ProgresBarChart />
+            </CardBody>
+          </Card>
         </div>
-        <div className="w-full max-w-8xl mx-auto p-4 ">
-          <div className="bg-white rounded-lg shadow-light-blue-200 shadow-xl p-6">
-            <h2 className="text-xl font-bold mb-4 text-center underline">
-              Line Chart Penurunan Total Anomali per Bulan
-            </h2>
-            <LineChartTrenPenurunanTotalAnomaliperBulan />
-          </div>
-        </div>
-        <div className="w-full max-w-8xl mx-auto p-4">
-          <div className="bg-white rounded-lg shadow-light-blue-200 shadow-xl p-6">
-            <h2 className="text-xl font-bold mb-4 text-center underline">
-              Penurunan per Bidang
-            </h2>
-            <PenurunanperBidang />
-          </div>
-        </div>
-        <div className="w-full max-w-8xl mx-auto p-4">
-          <div className="bg-white rounded-lg shadow-light-blue-200 shadow-xl p-6">
-            <h2 className="text-xl font-bold mb-4 text-center underline">
-              Line Chart Penurunan per Bidang
-            </h2>
-            <LineChartTrenPenurunanperBidang />
-          </div>
-        </div>
-        <div className="w-full max-w-8xl mx-auto p-4">
-          <div className="bg-white rounded-lg shadow-light-blue-200 shadow-xl p-6">
-            <h2 className="text-xl font-bold mb-4 text-center underline">
-              Anomali Closed per Bulan
-            </h2>
-            <AnomaliClosedperBulan />
-          </div>
-        </div>
-        <div className="w-full max-w-8xl mx-auto p-4">
-          <div className="bg-white rounded-lg shadow-light-blue-200 shadow-xl p-6">
-            <h2 className="text-xl font-bold mb-4 text-center underline">
-              Bar Anomali Closed per Bulan
-            </h2>
-            <AnomaliClosedBarChart />
-          </div>
-        </div>
-        <div className="w-full max-w-8xl mx-auto p-4">
-          <div className="bg-white rounded-lg shadow-light-blue-200 shadow-xl p-6">
-            <h2 className="text-xl font-bold mb-4 text-center underline">
-              Progres per Jenis Anomali
-            </h2>
-            <ProgresperJenisAnomali />
-          </div>
-        </div>
-        <div className="w-full max-w-8xl mx-auto p-4">
-          <div className="bg-white rounded-lg shadow-light-blue-200 shadow-xl p-6">
-            <h2 className="text-xl font-bold mb-4 text-center underline">
-              Bar Progres per Jenis Anomali
-            </h2>
-            <ProgresBarChart />
-          </div>
-        </div>
-      </CardBody>
-      <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4"></CardFooter>
-    </Card>
+      </div>
+    </div>
   );
 };
 

@@ -61,63 +61,91 @@ const SummaryTableAnomaliJaringan = () => {
       setLoading(false);
     }
   }, [data]);
-
   if (loading) {
-    return <div className="p-4">Loading data...</div>;
+    return (
+      <div className="flex items-center justify-center p-8">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-500"></div>
+        <span className="ml-2 text-gray-600">Loading data...</span>
+      </div>
+    );
   }
 
   return (
-    <div className="overflow-x-auto">
-      <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
-        <thead className="bg-gray-50">
-          <tr>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border">
-              Kategori Anomali
-            </th>
-            <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider border">
-              Open
-            </th>
-            <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider border">
-              Closed
-            </th>
-            <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider border">
-              Total
-            </th>
-          </tr>
-        </thead>
-        <tbody className="bg-white divide-y divide-gray-200">
-          {processedData.map((row, index) => (
-            <tr key={index} className="hover:bg-gray-50">
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 border">
-                {row.kategori}
+    <div className="overflow-hidden rounded-lg border border-gray-200 shadow-sm">
+      <div className="overflow-x-auto">
+        <table className="min-w-full divide-y divide-gray-200">
+          <thead className="bg-gradient-to-r from-purple-50 to-violet-50">
+            <tr>
+              <th className="px-4 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                Kategori Anomali
+              </th>
+              <th className="px-4 py-3 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                <span className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-red-100 text-red-800">
+                  Open
+                </span>
+              </th>
+              <th className="px-4 py-3 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                <span className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-green-100 text-green-800">
+                  Closed
+                </span>
+              </th>
+              <th className="px-4 py-3 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                Total
+              </th>
+            </tr>
+          </thead>
+          <tbody className="bg-white divide-y divide-gray-200">
+            {processedData.map((row, index) => (
+              <tr key={index} className="hover:bg-gray-50 transition-colors duration-150">
+                <td className="px-4 py-3 text-sm font-medium text-gray-900">
+                  {row.kategori}
+                </td>
+                <td className="px-4 py-3 text-center">
+                  <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
+                    row.open > 0 ? 'bg-red-100 text-red-800' : 'bg-gray-100 text-gray-600'
+                  }`}>
+                    {row.open}
+                  </span>
+                </td>
+                <td className="px-4 py-3 text-center">
+                  <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
+                    row.closed > 0 ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-600'
+                  }`}>
+                    {row.closed}
+                  </span>
+                </td>
+                <td className="px-4 py-3 text-center">
+                  <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                    {row.total}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+          <tfoot className="bg-gradient-to-r from-gray-50 to-purple-50">
+            <tr className="font-semibold">
+              <td className="px-4 py-3 text-sm font-bold text-gray-900">
+                Grand Total
               </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-900 border">
-                {row.open}
+              <td className="px-4 py-3 text-center">
+                <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-bold bg-red-200 text-red-900">
+                  {grandTotal.open}
+                </span>
               </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-900 border">
-                {row.closed}
+              <td className="px-4 py-3 text-center">
+                <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-bold bg-green-200 text-green-900">
+                  {grandTotal.closed}
+                </span>
               </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-900 border">
-                {row.total}
+              <td className="px-4 py-3 text-center">
+                <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-bold bg-blue-200 text-blue-900">
+                  {grandTotal.total}
+                </span>
               </td>
             </tr>
-          ))}
-          <tr className="bg-gray-100 font-semibold">
-            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 border">
-              Grand Total
-            </td>
-            <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-900 border">
-              {grandTotal.open}
-            </td>
-            <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-900 border">
-              {grandTotal.closed}
-            </td>
-            <td className="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-900 border">
-              {grandTotal.total}
-            </td>
-          </tr>
-        </tbody>
-      </table>
+          </tfoot>
+        </table>
+      </div>
     </div>
   );
 };

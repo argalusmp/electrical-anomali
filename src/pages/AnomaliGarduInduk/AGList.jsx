@@ -159,87 +159,120 @@ const AGList = () => {
       fetchData();
     }
   };
-
   return (
-    <Card className="">
-      <CardHeader floated={false} shadow={false} className="rounded-none">
-        <div className="mb-8 flex flex-wrap items-center justify-between gap-8">
-          <div>
-            <Typography variant="h2" color="blue-gray">
-              Anomali Gardu Induk
-            </Typography>
-            <Typography color="gray" className="mt-1 font-normal">
-              Laporan Anomali Gardu Induk
-            </Typography>
+    <div className="space-y-6">
+      {/* Header Section */}
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+          <div className="mb-4 lg:mb-0">
+            <div className="flex items-center space-x-3">
+              <div className="p-2 bg-blue-100 rounded-lg">
+                <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <Typography variant="h4" className="text-gray-900 font-bold">
+                  Anomali Gardu Induk
+                </Typography>
+                <Typography className="text-gray-600 mt-1">
+                  Kelola dan monitor laporan anomali peralatan gardu induk
+                </Typography>
+              </div>
+            </div>
           </div>
-          <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
+          
+          <div className="flex flex-col sm:flex-row gap-3">
             <Button
               variant="outlined"
               size="sm"
               onClick={() => setViewAll(true)}
               disabled={viewAll}
+              className="border-gray-300 text-gray-700 hover:bg-gray-50"
             >
-              View All
+              Lihat Semua
             </Button>
-            {/* Jika ingin menyediakan tombol untuk kembali ke mode pagination */}
             <Button
               variant="outlined"
               size="sm"
               onClick={() => setViewAll(false)}
               disabled={!viewAll}
+              className="border-gray-300 text-gray-700 hover:bg-gray-50"
             >
-              Paginate
+              Pagination
             </Button>
-
             <Button
-              className="flex items-center gap-3"
+              className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:shadow-xl transition-all duration-200"
               size="sm"
               onClick={() => navigate("create")}
             >
-              <UserPlusIcon strokeWidth={2} className="h-4 w-4" /> Tambah Data
+              <UserPlusIcon strokeWidth={2} className="h-4 w-4 mr-2" />
+              Tambah Data Baru
             </Button>
           </div>
         </div>
-        <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-          <Tabs
-            className="w-full md:w-max"
-            value={selectedTab}
-            onChange={(val) => {
-              console.log("Tab changed to:", val);
-              setSelectedTab(val);
-            }}
-          >
-            <TabsHeader
-              onClick={() => console.log("TabsHeader clicked!" + selectedTab)}
-            >
-              <Typography className="text-xs pr-3">Status Anomali</Typography>
-              {TABS.map(({ label, value }) => (
-                <Tab
-                  key={value}
-                  value={value}
-                  onClick={() => setSelectedTab(value)}
-                >
-                  &nbsp;&nbsp;{label}&nbsp;&nbsp;
-                </Tab>
-              ))}
-            </TabsHeader>
-          </Tabs>
+      </div>
 
-          <div className="w-full md:w-72">
+      {/* Filters and Search Section */}
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+          
+          {/* Status Filter Tabs */}
+          <div className="flex-1">
+            <Typography variant="small" className="text-gray-700 font-medium mb-3">
+              Filter Status Anomali
+            </Typography>
+            <Tabs
+              className="w-full"
+              value={selectedTab}
+              onChange={(val) => {
+                console.log("Tab changed to:", val);
+                setSelectedTab(val);
+              }}
+            >
+              <TabsHeader className="bg-gray-100 p-1 rounded-lg">
+                {TABS.map(({ label, value }) => (
+                  <Tab
+                    key={value}
+                    value={value}
+                    onClick={() => setSelectedTab(value)}
+                    className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+                      selectedTab === value 
+                        ? 'bg-white text-blue-600 shadow-sm' 
+                        : 'text-gray-600 hover:text-gray-900'
+                    }`}
+                  >
+                    {label}
+                  </Tab>
+                ))}
+              </TabsHeader>
+            </Tabs>
+          </div>
+
+          {/* Search Input */}
+          <div className="lg:w-80">
+            <Typography variant="small" className="text-gray-700 font-medium mb-3">
+              Pencarian Data
+            </Typography>
             <Input
-              label="Search"
+              label="Cari berdasarkan gardu induk, bay, phasa..."
               icon={<MagnifyingGlassIcon className="h-5 w-5" />}
               value={searchTerm}
               onChange={(e) => {
                 setSearchTerm(e.target.value);
-                fetchData(); // Panggil ulang fetchData setiap kali input berubah
+                fetchData();
+              }}
+              className="!border-gray-300 focus:!border-blue-500"
+              labelProps={{
+                className: "!text-gray-600",
               }}
             />
           </div>
         </div>
-      </CardHeader>
-      <CardBody className="overflow-scroll px-0">
-        <table className="mt-4 w-full min-w-full table-auto text-left">
+      </div>      {/* Data Table Section */}
+      <Card className="shadow-lg border-0">
+        <CardBody className="overflow-scroll px-0">
+          <table className="mt-4 w-full min-w-full table-auto text-left">
           <thead>
             <tr>
               <th className="cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50">
@@ -1013,10 +1046,10 @@ const AGList = () => {
             >
               Next
             </Button>
-          </div>
-        </CardFooter>
+          </div>        </CardFooter>
       )}
     </Card>
+    </div>
   );
 };
 

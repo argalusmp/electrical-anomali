@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router"; 
+import { Link, useLocation } from "react-router"; 
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import {
   IconButton,
@@ -21,11 +21,11 @@ import {
   TowerControl,
 } from "lucide-react";
 
-import { supabase } from "../utils/supabaseClient";
+import { useAuth } from "../context/AuthContext";
 
 const Sidebar = () => {
   const location = useLocation();
-  const navigate = useNavigate();
+  const { logout } = useAuth();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const openDrawer = () => setIsDrawerOpen(true);
@@ -51,8 +51,7 @@ const Sidebar = () => {
       icon: ShieldEllipsisIcon,
       href: "/anomali-proteksi",
     },
-    {
-      name: "Anomali Jaringan",
+    {      name: "Anomali Jaringan",
       icon: ChartNetworkIcon,
       href: "/anomali-jaringan",
     },
@@ -62,9 +61,9 @@ const Sidebar = () => {
     //   href: "/gardu-induk",
     // }
   ];
+  
   const handleLogout = async () => {
-    await supabase.auth.signOut();
-    navigate("/login");
+    await logout();
   };
 
   return (

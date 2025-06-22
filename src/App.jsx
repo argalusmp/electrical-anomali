@@ -15,22 +15,14 @@ import LoginPage from "./pages/LoginPage";
 import Register from "./pages/Register";
 import ProtectedRoute from "./component/ProtectedRoute";
 import GarduInduk from "./pages/GarduInduk/GarduInduk";
-import { supabase } from "./utils/supabaseClient";
-import { useEffect } from "react";
+import { AuthProvider } from "./context/AuthContext";
 
 function App() {
-  useEffect(() => {
-    const handleBeforeUnload = async () => {
-      await supabase.auth.signOut();
-    };
-
-    window.addEventListener("beforeunload", handleBeforeUnload);
-    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
-  }, []);
-
   return (
     <Router>
-      <AppContent />
+      <AuthProvider>
+        <AppContent />
+      </AuthProvider>
     </Router>
   );
 }
