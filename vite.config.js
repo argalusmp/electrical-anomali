@@ -6,4 +6,15 @@ export default defineConfig({
   plugins: [
     react(),
   ],
+  build: {
+    outDir: 'dist'
+  },
+  preview: {
+    port: 3000,
+    host: true
+  },
+  // Configure for SPA routing
+  server: {
+    historyApiFallback: true
+  }
 })
