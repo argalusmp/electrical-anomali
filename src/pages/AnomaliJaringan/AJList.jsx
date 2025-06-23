@@ -239,8 +239,7 @@ const AJList = () => {
       <Card className="shadow-lg border-0">
         <CardBody className="p-0">
           <div className="overflow-x-auto">
-            <table className="w-full min-w-full table-auto">
-              <thead>
+            <table className="w-full min-w-full table-auto">              <thead>
                 <tr className="bg-gradient-to-r from-gray-50 to-gray-100">
                   <th className="p-4 text-left border-b border-gray-200">
                     <Typography variant="small" className="font-semibold text-gray-700">
@@ -264,6 +263,11 @@ const AJList = () => {
                   </th>
                   <th className="p-4 text-left border-b border-gray-200">
                     <Typography variant="small" className="font-semibold text-gray-700">
+                      Phasa
+                    </Typography>
+                  </th>
+                  <th className="p-4 text-left border-b border-gray-200">
+                    <Typography variant="small" className="font-semibold text-gray-700">
                       Permasalahan
                     </Typography>
                   </th>
@@ -279,7 +283,81 @@ const AJList = () => {
                   </th>
                   <th className="p-4 text-left border-b border-gray-200">
                     <Typography variant="small" className="font-semibold text-gray-700">
-                      Status
+                      Tgl Rencana
+                    </Typography>
+                  </th>
+                  <th className="p-4 text-left border-b border-gray-200">
+                    <Typography variant="small" className="font-semibold text-gray-700">
+                      Tgl Realisasi
+                    </Typography>
+                  </th>
+                  <th className="p-4 text-left border-b border-gray-200">
+                    <Typography variant="small" className="font-semibold text-gray-700">
+                      Mayor/Minor
+                    </Typography>
+                  </th>
+                  <th className="p-4 text-left border-b border-gray-200">
+                    <Typography variant="small" className="font-semibold text-gray-700">
+                      Status Selesai
+                    </Typography>
+                  </th>
+                  <th className="p-4 text-left border-b border-gray-200">
+                    <Typography variant="small" className="font-semibold text-gray-700">
+                      Data Pendukung
+                    </Typography>
+                  </th>
+                  <th className="p-4 text-left border-b border-gray-200">
+                    <Typography variant="small" className="font-semibold text-gray-700">
+                      Usulan Perbaikan
+                    </Typography>
+                  </th>
+                  <th className="p-4 text-left border-b border-gray-200">
+                    <Typography variant="small" className="font-semibold text-gray-700">
+                      Pelaksana
+                    </Typography>
+                  </th>
+                  <th className="p-4 text-left border-b border-gray-200">
+                    <Typography variant="small" className="font-semibold text-gray-700">
+                      Perkiraan Anggaran
+                    </Typography>
+                  </th>
+                  <th className="p-4 text-left border-b border-gray-200">
+                    <Typography variant="small" className="font-semibold text-gray-700">
+                      RAB URL
+                    </Typography>
+                  </th>
+                  <th className="p-4 text-left border-b border-gray-200">
+                    <Typography variant="small" className="font-semibold text-gray-700">
+                      Keterangan
+                    </Typography>
+                  </th>
+                  <th className="p-4 text-left border-b border-gray-200">
+                    <Typography variant="small" className="font-semibold text-gray-700">
+                      Realisasi RAB
+                    </Typography>
+                  </th>
+                  <th className="p-4 text-left border-b border-gray-200">
+                    <Typography variant="small" className="font-semibold text-gray-700">
+                      BA Penyelesaian
+                    </Typography>
+                  </th>                  <th className="p-4 text-left border-b border-gray-200">
+                    <Typography variant="small" className="font-semibold text-gray-700">
+                      Bulan Selesai
+                    </Typography>
+                  </th>
+                  <th className="p-4 text-left border-b border-gray-200">
+                    <Typography variant="small" className="font-semibold text-gray-700">
+                      Status Anomali
+                    </Typography>
+                  </th>
+                  <th className="p-4 text-left border-b border-gray-200">
+                    <Typography variant="small" className="font-semibold text-gray-700">
+                      Action
+                    </Typography>
+                  </th>
+                  <th className="p-4 text-left border-b border-gray-200">
+                    <Typography variant="small" className="font-semibold text-gray-700">
+                      Status Anomali
                     </Typography>
                   </th>
                   <th className="p-4 text-left border-b border-gray-200">
@@ -288,8 +366,7 @@ const AJList = () => {
                     </Typography>
                   </th>
                 </tr>
-              </thead>
-              <tbody>
+              </thead>              <tbody>
                 {currentData.map((row, index) => (
                   <tr key={row.id} className="hover:bg-gray-50 transition-colors duration-200">
                     <td className="p-4 border-b border-gray-200">
@@ -298,85 +375,139 @@ const AJList = () => {
                       </Typography>
                     </td>
                     <td className="p-4 border-b border-gray-200">
-                      {editingId === row.id ? (
-                        <Input
-                          size="sm"
-                          value={editData.penghantar || ""}
-                          onChange={(e) => handleChange("penghantar", e.target.value)}
-                          className="min-w-[120px]"
-                        />
-                      ) : (
-                        <Typography variant="small" className="font-medium text-gray-700">
-                          {row.penghantar}
-                        </Typography>
-                      )}
+                      <Typography variant="small" className="font-medium text-gray-700">
+                        {row.penghantar}
+                      </Typography>
                     </td>
                     <td className="p-4 border-b border-gray-200">
-                      {editingId === row.id ? (
-                        <Input
-                          size="sm"
-                          value={editData.span_tower || ""}
-                          onChange={(e) => handleChange("span_tower", e.target.value)}
-                          className="min-w-[120px]"
-                        />
-                      ) : (
-                        <Typography variant="small" className="text-gray-600">
-                          {row.span_tower}
-                        </Typography>
-                      )}
+                      <Typography variant="small" className="text-gray-600">
+                        {row.span_tower}
+                      </Typography>
                     </td>
                     <td className="p-4 border-b border-gray-200">
-                      {editingId === row.id ? (
-                        <Input
-                          size="sm"
-                          value={editData.peralatan || ""}
-                          onChange={(e) => handleChange("peralatan", e.target.value)}
-                          className="min-w-[120px]"
-                        />
+                      <Typography variant="small" className="text-gray-600">
+                        {row.peralatan}
+                      </Typography>
+                    </td>
+                    <td className="p-4 border-b border-gray-200">
+                      <Typography variant="small" className="text-gray-600">
+                        {row.phasa || '-'}
+                      </Typography>
+                    </td>
+                    <td className="p-4 border-b border-gray-200 max-w-xs">
+                      <Typography variant="small" className="text-gray-600 truncate">
+                        {row.permasalahan}
+                      </Typography>
+                    </td>
+                    <td className="p-4 border-b border-gray-200">
+                      <Chip
+                        variant="gradient"
+                        size="sm"
+                        value={row.kategori_anomali}
+                        color={
+                          row.kategori_anomali === "Mayor" ? "red" : 
+                          row.kategori_anomali === "Minor" ? "orange" : "blue"
+                        }
+                        className="text-xs font-medium"
+                      />
+                    </td>
+                    <td className="p-4 border-b border-gray-200">
+                      <Typography variant="small" className="text-gray-600">
+                        {row.tanggal_temuan ? new Date(row.tanggal_temuan).toLocaleDateString('id-ID') : '-'}
+                      </Typography>
+                    </td>
+                    <td className="p-4 border-b border-gray-200">
+                      <Typography variant="small" className="text-gray-600">
+                        {row.tanggal_rencana ? new Date(row.tanggal_rencana).toLocaleDateString('id-ID') : '-'}
+                      </Typography>
+                    </td>
+                    <td className="p-4 border-b border-gray-200">
+                      <Typography variant="small" className="text-gray-600">
+                        {row.tanggal_realisasi ? new Date(row.tanggal_realisasi).toLocaleDateString('id-ID') : '-'}
+                      </Typography>
+                    </td>
+                    <td className="p-4 border-b border-gray-200">
+                      <Chip
+                        variant="gradient"
+                        size="sm"
+                        value={row.anomali_mayor_minor}
+                        color={row.anomali_mayor_minor === 'Mayor' ? 'red' : 'blue'}
+                        className="text-xs font-medium"
+                      />
+                    </td>
+                    <td className="p-4 border-b border-gray-200">
+                      <Typography variant="small" className="text-gray-600">
+                        {row.status_selesai || '-'}
+                      </Typography>
+                    </td>
+                    <td className="p-4 border-b border-gray-200">
+                      {row.data_pendukung_url ? (
+                        <a href={row.data_pendukung_url} target="_blank" rel="noopener noreferrer">
+                          <Typography variant="small" className="text-blue-600 hover:text-blue-800 underline">
+                            Link
+                          </Typography>
+                        </a>
                       ) : (
-                        <Typography variant="small" className="text-gray-600">
-                          {row.peralatan}
-                        </Typography>
+                        <Typography variant="small" className="text-gray-400">-</Typography>
                       )}
                     </td>
                     <td className="p-4 border-b border-gray-200 max-w-xs">
-                      {editingId === row.id ? (
-                        <Input
-                          size="sm"
-                          value={editData.permasalahan || ""}
-                          onChange={(e) => handleChange("permasalahan", e.target.value)}
-                          className="min-w-[200px]"
-                        />
-                      ) : (
-                        <Typography variant="small" className="text-gray-600 truncate">
-                          {row.permasalahan}
-                        </Typography>
-                      )}
+                      <Typography variant="small" className="text-gray-600 truncate">
+                        {row.usulan_perbaikan || '-'}
+                      </Typography>
                     </td>
                     <td className="p-4 border-b border-gray-200">
-                      {editingId === row.id ? (
-                        <Input
-                          size="sm"
-                          value={editData.kategori_anomali || ""}
-                          onChange={(e) => handleChange("kategori_anomali", e.target.value)}
-                          className="min-w-[120px]"
-                        />
+                      <Typography variant="small" className="text-gray-600">
+                        {row.pelaksana || '-'}
+                      </Typography>
+                    </td>
+                    <td className="p-4 border-b border-gray-200">
+                      <Typography variant="small" className="text-gray-600">
+                        {row.perkiraan_kebutuhan_anggaran ? 
+                          new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(row.perkiraan_kebutuhan_anggaran) 
+                          : '-'
+                        }
+                      </Typography>
+                    </td>
+                    <td className="p-4 border-b border-gray-200">
+                      {row.rab_url ? (
+                        <a href={row.rab_url} target="_blank" rel="noopener noreferrer">
+                          <Typography variant="small" className="text-blue-600 hover:text-blue-800 underline">
+                            RAB
+                          </Typography>
+                        </a>
                       ) : (
-                        <Chip
-                          variant="gradient"
-                          size="sm"
-                          value={row.kategori_anomali}
-                          color={
-                            row.kategori_anomali === "Mayor" ? "red" : 
-                            row.kategori_anomali === "Minor" ? "orange" : "blue"
-                          }
-                          className="text-xs font-medium"
-                        />
+                        <Typography variant="small" className="text-gray-400">-</Typography>
+                      )}
+                    </td>
+                    <td className="p-4 border-b border-gray-200 max-w-xs">
+                      <Typography variant="small" className="text-gray-600 truncate">
+                        {row.keterangan || '-'}
+                      </Typography>
+                    </td>
+                    <td className="p-4 border-b border-gray-200">
+                      <Chip
+                        variant="gradient"
+                        size="sm"
+                        value={row.realisasi_rab ? 'Ya' : 'Tidak'}
+                        color={row.realisasi_rab ? 'green' : 'red'}
+                        className="text-xs font-medium"
+                      />
+                    </td>
+                    <td className="p-4 border-b border-gray-200">
+                      {row.ba_penyelesaian_url ? (
+                        <a href={row.ba_penyelesaian_url} target="_blank" rel="noopener noreferrer">
+                          <Typography variant="small" className="text-blue-600 hover:text-blue-800 underline">
+                            BA
+                          </Typography>
+                        </a>
+                      ) : (
+                        <Typography variant="small" className="text-gray-400">-</Typography>
                       )}
                     </td>
                     <td className="p-4 border-b border-gray-200">
                       <Typography variant="small" className="text-gray-600">
-                        {new Date(row.tanggal_temuan).toLocaleDateString('id-ID')}
+                        {row.bulan_selesai || '-'}
                       </Typography>
                     </td>
                     <td className="p-4 border-b border-gray-200">
@@ -385,8 +516,8 @@ const AJList = () => {
                         size="sm"
                         value={row.status_anomali}
                         color={
-                          row.status_anomali === "Closed" ? "green" :
-                          row.status_anomali === "Open" ? "red" : "orange"
+                          row.status_anomali === "CLOSE" ? "green" :
+                          row.status_anomali === "OPEN" ? "red" : "orange"
                         }
                         className="text-xs font-medium"
                       />
@@ -398,6 +529,53 @@ const AJList = () => {
                             <Tooltip content="Simpan">
                               <IconButton
                                 variant="text"
+                                size="sm"
+                                onClick={() => handleSave(row.id)}
+                                className="text-green-600 hover:bg-green-50"
+                              >
+                                <CheckIcon className="h-4 w-4" />
+                              </IconButton>
+                            </Tooltip>
+                            <Tooltip content="Batal">
+                              <IconButton
+                                variant="text"
+                                size="sm"
+                                onClick={() => setEditingId(null)}
+                                className="text-gray-600 hover:bg-gray-50"
+                              >
+                                <XIcon className="h-4 w-4" />
+                              </IconButton>
+                            </Tooltip>
+                          </>
+                        ) : (
+                          <>
+                            <Tooltip content="Edit">
+                              <IconButton
+                                variant="text"
+                                size="sm"
+                                onClick={() => handleEdit(row)}
+                                className="text-blue-600 hover:bg-blue-50"
+                              >
+                                <PencilIcon className="h-4 w-4" />
+                              </IconButton>
+                            </Tooltip>
+                            <Tooltip content="Hapus">
+                              <IconButton
+                                variant="text"
+                                size="sm"
+                                onClick={() => handleDelete(row.id)}
+                                className="text-red-600 hover:bg-red-50"
+                              >
+                                <Trash2Icon className="h-4 w-4" />
+                              </IconButton>
+                            </Tooltip>
+                          </>
+                        )}
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
                                 size="sm"
                                 onClick={() => handleSave(row.id)}
                                 className="text-green-600 hover:bg-green-50"

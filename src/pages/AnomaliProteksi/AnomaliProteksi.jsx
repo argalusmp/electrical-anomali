@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router";
-import APList from "./APList";
-import APCreate from "./APCreate";
+import APList from "./APList_new";
+import APCreate from "./APCreate_new";
 
 const AnomaliProteksi = () => {
   return (

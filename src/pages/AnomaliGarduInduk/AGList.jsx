@@ -158,350 +158,430 @@ const AGList = () => {
       await supabase.from("anomali_garduinduk").delete().eq("id", id);
       fetchData();
     }
-  };
-  return (
-    <div className="space-y-6">
-      {/* Header Section */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
-          <div className="mb-4 lg:mb-0">
-            <div className="flex items-center space-x-3">
-              <div className="p-2 bg-blue-100 rounded-lg">
-                <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+  };  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50/30 via-white to-indigo-50/20">
+      <div className="space-y-8">
+        {/* Enhanced Header Section */}
+        <div className="relative overflow-hidden bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-800 rounded-2xl shadow-2xl border border-blue-200">
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-transparent"></div>
+          <div className="relative p-8">
+            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+              <div className="mb-6 lg:mb-0">
+                <div className="flex items-center space-x-4">
+                  <div className="p-3 bg-white/20 backdrop-blur-sm rounded-xl border border-white/30">
+                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <Typography variant="h3" className="text-white font-bold mb-2">
+                      Anomali Gardu Induk
+                    </Typography>
+                    <Typography className="text-blue-100 text-lg">
+                      Sistem Monitoring & Manajemen Anomali Peralatan Gardu Induk
+                    </Typography>
+                    <div className="flex items-center mt-3 space-x-4">
+                      <div className="flex items-center text-blue-100">
+                        <span className="w-2 h-2 bg-green-400 rounded-full mr-2"></span>
+                        Total Data: {data.length}
+                      </div>
+                      <div className="flex items-center text-blue-100">
+                        <span className="w-2 h-2 bg-yellow-400 rounded-full mr-2"></span>
+                        Status: Aktif
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div>
-                <Typography variant="h4" className="text-gray-900 font-bold">
-                  Anomali Gardu Induk
-                </Typography>
-                <Typography className="text-gray-600 mt-1">
-                  Kelola dan monitor laporan anomali peralatan gardu induk
-                </Typography>
+              
+              <div className="flex flex-col sm:flex-row gap-3">
+                <Button
+                  variant="outlined"
+                  size="md"
+                  onClick={() => setViewAll(true)}
+                  disabled={viewAll}
+                  className="border-white/30 text-white hover:bg-white/10 backdrop-blur-sm transition-all duration-300"
+                >
+                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+                  </svg>
+                  Lihat Semua
+                </Button>
+                <Button
+                  variant="outlined"
+                  size="md"
+                  onClick={() => setViewAll(false)}
+                  disabled={!viewAll}
+                  className="border-white/30 text-white hover:bg-white/10 backdrop-blur-sm transition-all duration-300"
+                >
+                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+                  </svg>
+                  Pagination
+                </Button>
+                <Button
+                  className="bg-white/20 hover:bg-white/30 text-white border border-white/30 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                  size="md"
+                  onClick={() => navigate("create")}
+                >
+                  <UserPlusIcon strokeWidth={2} className="h-5 w-5 mr-2" />
+                  Tambah Data Baru
+                </Button>
               </div>
             </div>
           </div>
-          
-          <div className="flex flex-col sm:flex-row gap-3">
-            <Button
-              variant="outlined"
-              size="sm"
-              onClick={() => setViewAll(true)}
-              disabled={viewAll}
-              className="border-gray-300 text-gray-700 hover:bg-gray-50"
-            >
-              Lihat Semua
-            </Button>
-            <Button
-              variant="outlined"
-              size="sm"
-              onClick={() => setViewAll(false)}
-              disabled={!viewAll}
-              className="border-gray-300 text-gray-700 hover:bg-gray-50"
-            >
-              Pagination
-            </Button>
-            <Button
-              className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:shadow-xl transition-all duration-200"
-              size="sm"
-              onClick={() => navigate("create")}
-            >
-              <UserPlusIcon strokeWidth={2} className="h-4 w-4 mr-2" />
-              Tambah Data Baru
-            </Button>
-          </div>
-        </div>
-      </div>
+        </div>        {/* Enhanced Filters and Search Section */}
+        <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-gray-200/60 p-8">
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+            
+            {/* Status Filter Tabs */}
+            <div className="flex-1">
+              <Typography variant="h6" className="text-gray-800 font-semibold mb-4 flex items-center">
+                <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.414A1 1 0 013 6.707V4z" />
+                </svg>
+                Filter Status Anomali
+              </Typography>              <Tabs
+                className="w-full"
+                value={selectedTab}
+                onChange={(val) => {
+                  console.log("Tab changed to:", val);
+                  setSelectedTab(val);
+                }}
+              >
+                <TabsHeader className="bg-gray-50 p-1">
+                  {TABS.map(({ label, value }) => (
+                    <Tab
+                      key={value}
+                      value={value}
+                      onClick={() => setSelectedTab(value)}
+                      className="font-medium data-[selected=true]:bg-white data-[selected=true]:text-blue-600 data-[selected=true]:shadow-sm transition-all duration-200"
+                    >
+                      {label}
+                    </Tab>
+                  ))}
+                </TabsHeader>
+              </Tabs>
+            </div>
 
-      {/* Filters and Search Section */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-          
-          {/* Status Filter Tabs */}
-          <div className="flex-1">
-            <Typography variant="small" className="text-gray-700 font-medium mb-3">
-              Filter Status Anomali
-            </Typography>
-            <Tabs
-              className="w-full"
-              value={selectedTab}
-              onChange={(val) => {
-                console.log("Tab changed to:", val);
-                setSelectedTab(val);
-              }}
-            >
-              <TabsHeader className="bg-gray-100 p-1 rounded-lg">
-                {TABS.map(({ label, value }) => (
-                  <Tab
-                    key={value}
-                    value={value}
-                    onClick={() => setSelectedTab(value)}
-                    className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
-                      selectedTab === value 
-                        ? 'bg-white text-blue-600 shadow-sm' 
-                        : 'text-gray-600 hover:text-gray-900'
-                    }`}
-                  >
-                    {label}
-                  </Tab>
-                ))}
-              </TabsHeader>
-            </Tabs>
+            {/* Enhanced Search Input */}
+            <div className="lg:w-96">
+              <Typography variant="h6" className="text-gray-800 font-semibold mb-4 flex items-center">
+                <svg className="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                Pencarian Data
+              </Typography>
+              <div className="relative">
+                <Input
+                  label="Cari berdasarkan gardu induk, bay, phasa, peralatan..."
+                  icon={<MagnifyingGlassIcon className="h-5 w-5 text-blue-500" />}
+                  value={searchTerm}
+                  onChange={(e) => {
+                    setSearchTerm(e.target.value);
+                    fetchData();
+                  }}
+                  className="!border-gray-300 focus:!border-blue-500 !rounded-xl shadow-sm"
+                  labelProps={{
+                    className: "!text-gray-600 peer-focus:!text-blue-600",
+                  }}
+                />
+              </div>
+            </div>
           </div>
 
-          {/* Search Input */}
-          <div className="lg:w-80">
-            <Typography variant="small" className="text-gray-700 font-medium mb-3">
-              Pencarian Data
-            </Typography>
-            <Input
-              label="Cari berdasarkan gardu induk, bay, phasa..."
-              icon={<MagnifyingGlassIcon className="h-5 w-5" />}
-              value={searchTerm}
-              onChange={(e) => {
-                setSearchTerm(e.target.value);
-                fetchData();
-              }}
-              className="!border-gray-300 focus:!border-blue-500"
-              labelProps={{
-                className: "!text-gray-600",
-              }}
-            />
+          {/* Data Statistics */}
+          <div className="mt-6 pt-6 border-t border-gray-200">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="bg-gradient-to-br from-green-50 to-emerald-100 rounded-xl p-4 border border-green-200">
+                <div className="flex items-center">
+                  <div className="p-2 bg-green-500 rounded-lg">
+                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <div className="ml-3">
+                    <Typography variant="small" className="text-green-600 font-medium">CLOSED</Typography>
+                    <Typography variant="h6" className="text-green-800 font-bold">
+                      {data.filter(item => item.status_anomali === 'CLOSED').length}
+                    </Typography>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-gradient-to-br from-orange-50 to-amber-100 rounded-xl p-4 border border-orange-200">
+                <div className="flex items-center">
+                  <div className="p-2 bg-orange-500 rounded-lg">
+                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div className="ml-3">
+                    <Typography variant="small" className="text-orange-600 font-medium">OPEN</Typography>
+                    <Typography variant="h6" className="text-orange-800 font-bold">
+                      {data.filter(item => item.status_anomali === 'OPEN').length}
+                    </Typography>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-gradient-to-br from-red-50 to-rose-100 rounded-xl p-4 border border-red-200">
+                <div className="flex items-center">
+                  <div className="p-2 bg-red-500 rounded-lg">
+                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 15.5c-.77.833.192 2.5 1.732 2.5z" />
+                    </svg>
+                  </div>
+                  <div className="ml-3">
+                    <Typography variant="small" className="text-red-600 font-medium">MAYOR</Typography>
+                    <Typography variant="h6" className="text-red-800 font-bold">
+                      {data.filter(item => item.anomali_mayor_minor === 'Mayor').length}
+                    </Typography>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-gradient-to-br from-blue-50 to-cyan-100 rounded-xl p-4 border border-blue-200">
+                <div className="flex items-center">
+                  <div className="p-2 bg-blue-500 rounded-lg">
+                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div className="ml-3">
+                    <Typography variant="small" className="text-blue-600 font-medium">MINOR</Typography>
+                    <Typography variant="h6" className="text-blue-800 font-bold">
+                      {data.filter(item => item.anomali_mayor_minor === 'Minor').length}
+                    </Typography>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>      {/* Data Table Section */}
-      <Card className="shadow-lg border-0">
-        <CardBody className="overflow-scroll px-0">
-          <table className="mt-4 w-full min-w-full table-auto text-left">
-          <thead>
-            <tr>
-              <th className="cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50">
-                <Typography
-                  variant="small"
-                  color="blue-gray"
-                  className="flex items-center justify-between gap-2 font-normal leading-none opacity-70"
-                >
-                  No
-                  {/* <ChevronUpDownIcon strokeWidth={2} className="h-4 w-4" /> */}
-                </Typography>
-              </th>
-              <th className="cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50">
-                <Typography
-                  variant="small"
-                  color="blue-gray"
-                  className="flex items-center justify-between gap-2 font-normal leading-none opacity-70"
-                >
-                  Gardu Induk
-                  {/* <ChevronUpDownIcon strokeWidth={2} className="h-4 w-4" /> */}
-                </Typography>
-              </th>
-              <th className="cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50">
-                <Typography
-                  variant="small"
-                  color="blue-gray"
-                  className="flex items-center justify-between gap-2 font-normal leading-none opacity-70"
-                >
-                  Bay
-                </Typography>
-              </th>
-              <th className="cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50">
-                <Typography
-                  variant="small"
-                  color="blue-gray"
-                  className="flex items-center justify-between gap-2 font-normal leading-none opacity-70"
-                >
-                  Peralatan
-                </Typography>
-              </th>
-              <th className="cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50">
-                <Typography
-                  variant="small"
-                  color="blue-gray"
-                  className="flex items-center justify-between gap-2 font-normal leading-none opacity-70"
-                >
-                  PHASA
-                  {/* <ChevronUpDownIcon strokeWidth={2} className="h-4 w-4" /> */}
-                </Typography>
-              </th>
-              <th className="cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 pr-20 transition-colors hover:bg-blue-gray-50">
-                <Typography
-                  variant="small"
-                  color="blue-gray"
-                  className="flex items-center justify-between gap-2 font-normal leading-none opacity-70"
-                >
-                  Permasalahan
-                </Typography>
-              </th>
-              <th className="cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50">
-                <Typography
-                  variant="small"
-                  color="blue-gray"
-                  className="flex items-center justify-between gap-2 font-normal leading-none opacity-70"
-                >
-                  Kategori Anomali
-                </Typography>
-              </th>
-              <th className="cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 pr-14 transition-colors hover:bg-blue-gray-50">
-                <Typography
-                  variant="small"
-                  color="blue-gray"
-                  className="flex items-center justify-between gap-2 font-normal leading-none opacity-70"
-                >
-                  Tanggal Temuan
-                </Typography>
-              </th>
-              <th className="cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 pr-14 transition-colors hover:bg-blue-gray-50">
-                <Typography
-                  variant="small"
-                  color="blue-gray"
-                  className="flex items-center justify-between gap-2 font-normal leading-none opacity-70"
-                >
-                  Tanggal Rencana
-                </Typography>
-              </th>
-              <th className="cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 pr-14 transition-colors hover:bg-blue-gray-50">
-                <Typography
-                  variant="small"
-                  color="blue-gray"
-                  className="flex items-center justify-between gap-2 font-normal leading-none opacity-70"
-                >
-                  Tanggal Realisasi
-                </Typography>
-              </th>
-              <th className="cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50">
-                <Typography
-                  variant="small"
-                  color="blue-gray"
-                  className="flex items-center justify-between gap-2 font-normal leading-none opacity-70"
-                >
-                  Anomali Mayor/Minor
-                </Typography>
-              </th>
-              <th className="cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50">
-                <Typography
-                  variant="small"
-                  color="blue-gray"
-                  className="flex items-center justify-between gap-2 font-normal leading-none opacity-70"
-                >
-                  Status
-                  {/* <ChevronUpDownIcon strokeWidth={2} className="h-4 w-4" /> */}
-                </Typography>
-              </th>
-              <th className="cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50">
-                <Typography
-                  variant="small"
-                  color="blue-gray"
-                  className="flex items-center justify-between gap-2 font-normal leading-none opacity-70"
-                >
-                  Data Pendukung Anomali
-                </Typography>
-              </th>
-              <th className="cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50">
-                <Typography
-                  variant="small"
-                  color="blue-gray"
-                  className="flex items-center justify-between gap-2 font-normal leading-none opacity-70"
-                >
-                  Usulan Perbaikan
-                </Typography>
-              </th>
-              <th className="cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50">
-                <Typography
-                  variant="small"
-                  color="blue-gray"
-                  className="flex items-center justify-between gap-2 font-normal leading-none opacity-70"
-                >
-                  Pelaksanaan
-                </Typography>
-              </th>
-              <th className="cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50">
-                <Typography
-                  variant="small"
-                  color="blue-gray"
-                  className="flex items-center justify-between gap-2 font-normal leading-none opacity-70"
-                >
-                  Estimasi Anggaran
-                </Typography>
-              </th>
-              <th className="cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50">
-                <Typography
-                  variant="small"
-                  color="blue-gray"
-                  className="flex items-center justify-between gap-2 font-normal leading-none opacity-70"
-                >
-                  RAB
-                </Typography>
-              </th>
-              <th className="cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50">
-                <Typography
-                  variant="small"
-                  color="blue-gray"
-                  className="flex items-center justify-between gap-2 font-normal leading-none opacity-70"
-                >
-                  Keterangan
-                </Typography>
-              </th>
-              <th className="cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50">
-                <Typography
-                  variant="small"
-                  color="blue-gray"
-                  className="flex items-center justify-between gap-2 font-normal leading-none opacity-70"
-                >
-                  Realisasi RAB
-                </Typography>
-              </th>
-              <th className="cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50">
-                <Typography
-                  variant="small"
-                  color="blue-gray"
-                  className="flex items-center justify-between gap-2 font-normal leading-none opacity-70"
-                >
-                  Link BA Penyelesaian
-                </Typography>
-              </th>
-              <th className="cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 pr-32 transition-colors hover:bg-blue-gray-50">
-                <Typography
-                  variant="small"
-                  color="blue-gray"
-                  className="flex items-center justify-between gap-2 font-normal leading-none opacity-70"
-                >
-                  Bulan Selesai
-                </Typography>
-              </th>
-              <th className="cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50">
-                <Typography
-                  variant="small"
-                  color="blue-gray"
-                  className="flex items-center justify-between gap-2 font-normal leading-none opacity-70"
-                >
-                  Status Anomali
-                  {/* <ChevronUpDownIcon strokeWidth={2} className="h-4 w-4" /> */}
-                </Typography>
-              </th>
-              <th className="cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50">
-                <Typography
-                  variant="small"
-                  color="blue-gray"
-                  className="flex items-center justify-between gap-2 font-normal leading-none opacity-70"
-                >
-                  Action
-                </Typography>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentData.map((row, index) => (
-              <tr key={row.id}>
-                {/* Use a unique key from your data (e.g., id) */}
-                <td className="p-4 border-b border-blue-gray-50">
+        </div>        {/* Enhanced Data Table Section */}
+        <Card className="shadow-2xl border-0 rounded-2xl overflow-hidden bg-white/90 backdrop-blur-sm">
+          <CardBody className="overflow-scroll px-0">
+            <table className="mt-4 w-full min-w-full table-auto text-left">
+            <thead>
+              <tr className="bg-gradient-to-r from-gray-50 via-white to-gray-50 border-b-2 border-gray-200">
+                <th className="cursor-pointer border-y border-blue-gray-100 bg-gradient-to-r from-blue-50 to-indigo-50 p-4 transition-colors hover:from-blue-100 hover:to-indigo-100">
                   <Typography
                     variant="small"
                     color="blue-gray"
-                    className="font-normal"
+                    className="flex items-center justify-between gap-2 font-bold leading-none text-gray-700"
                   >
-                    {index + 1 + (viewAll ? 0 : indexOfFirstRow)}
+                    No
                   </Typography>
-                </td>
+                </th>
+                <th className="cursor-pointer border-y border-blue-gray-100 bg-gradient-to-r from-blue-50 to-indigo-50 p-4 transition-colors hover:from-blue-100 hover:to-indigo-100">
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="flex items-center justify-between gap-2 font-bold leading-none text-gray-700"
+                  >
+                    Gardu Induk
+                  </Typography>
+                </th>                <th className="cursor-pointer border-y border-blue-gray-100 bg-gradient-to-r from-blue-50 to-indigo-50 p-4 transition-colors hover:from-blue-100 hover:to-indigo-100">
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="flex items-center justify-between gap-2 font-bold leading-none text-gray-700"
+                  >
+                    Bay
+                  </Typography>
+                </th>
+                <th className="cursor-pointer border-y border-blue-gray-100 bg-gradient-to-r from-blue-50 to-indigo-50 p-4 transition-colors hover:from-blue-100 hover:to-indigo-100">
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="flex items-center justify-between gap-2 font-bold leading-none text-gray-700"
+                  >
+                    Peralatan
+                  </Typography>
+                </th>
+                <th className="cursor-pointer border-y border-blue-gray-100 bg-gradient-to-r from-blue-50 to-indigo-50 p-4 transition-colors hover:from-blue-100 hover:to-indigo-100">
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="flex items-center justify-between gap-2 font-bold leading-none text-gray-700"
+                  >
+                    PHASA
+                  </Typography>
+                </th>
+                <th className="cursor-pointer border-y border-blue-gray-100 bg-gradient-to-r from-blue-50 to-indigo-50 p-4 pr-20 transition-colors hover:from-blue-100 hover:to-indigo-100">
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="flex items-center justify-between gap-2 font-bold leading-none text-gray-700"
+                  >
+                    Permasalahan
+                  </Typography>
+                </th>
+                <th className="cursor-pointer border-y border-blue-gray-100 bg-gradient-to-r from-blue-50 to-indigo-50 p-4 transition-colors hover:from-blue-100 hover:to-indigo-100">
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="flex items-center justify-between gap-2 font-bold leading-none text-gray-700"
+                  >
+                    Kategori Anomali
+                  </Typography>
+                </th>
+                <th className="cursor-pointer border-y border-blue-gray-100 bg-gradient-to-r from-blue-50 to-indigo-50 p-4 pr-14 transition-colors hover:from-blue-100 hover:to-indigo-100">
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="flex items-center justify-between gap-2 font-bold leading-none text-gray-700"
+                  >
+                    Tanggal Temuan
+                  </Typography>
+                </th>
+                <th className="cursor-pointer border-y border-blue-gray-100 bg-gradient-to-r from-blue-50 to-indigo-50 p-4 pr-14 transition-colors hover:from-blue-100 hover:to-indigo-100">
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="flex items-center justify-between gap-2 font-bold leading-none text-gray-700"
+                  >
+                    Tanggal Rencana
+                  </Typography>
+                </th>
+                <th className="cursor-pointer border-y border-blue-gray-100 bg-gradient-to-r from-blue-50 to-indigo-50 p-4 pr-14 transition-colors hover:from-blue-100 hover:to-indigo-100">
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="flex items-center justify-between gap-2 font-bold leading-none text-gray-700"
+                  >
+                    Tanggal Realisasi
+                  </Typography>
+                </th>
+                <th className="cursor-pointer border-y border-blue-gray-100 bg-gradient-to-r from-blue-50 to-indigo-50 p-4 transition-colors hover:from-blue-100 hover:to-indigo-100">
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="flex items-center justify-between gap-2 font-bold leading-none text-gray-700"
+                  >
+                    Anomali Mayor/Minor
+                  </Typography>
+                </th>
+                <th className="cursor-pointer border-y border-blue-gray-100 bg-gradient-to-r from-blue-50 to-indigo-50 p-4 transition-colors hover:from-blue-100 hover:to-indigo-100">
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="flex items-center justify-between gap-2 font-bold leading-none text-gray-700"
+                  >
+                    Status
+                  </Typography>
+                </th>
+                <th className="cursor-pointer border-y border-blue-gray-100 bg-gradient-to-r from-blue-50 to-indigo-50 p-4 transition-colors hover:from-blue-100 hover:to-indigo-100">
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="flex items-center justify-between gap-2 font-bold leading-none text-gray-700"
+                  >
+                    Data Pendukung Anomali
+                  </Typography>
+                </th>
+                <th className="cursor-pointer border-y border-blue-gray-100 bg-gradient-to-r from-blue-50 to-indigo-50 p-4 transition-colors hover:from-blue-100 hover:to-indigo-100">
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="flex items-center justify-between gap-2 font-bold leading-none text-gray-700"
+                  >
+                    Usulan Perbaikan
+                  </Typography>
+                </th>
+                <th className="cursor-pointer border-y border-blue-gray-100 bg-gradient-to-r from-blue-50 to-indigo-50 p-4 transition-colors hover:from-blue-100 hover:to-indigo-100">
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="flex items-center justify-between gap-2 font-bold leading-none text-gray-700"
+                  >
+                    Pelaksanaan
+                  </Typography>
+                </th>
+                <th className="cursor-pointer border-y border-blue-gray-100 bg-gradient-to-r from-blue-50 to-indigo-50 p-4 transition-colors hover:from-blue-100 hover:to-indigo-100">
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="flex items-center justify-between gap-2 font-bold leading-none text-gray-700"
+                  >
+                    Estimasi Anggaran
+                  </Typography>
+                </th>
+                <th className="cursor-pointer border-y border-blue-gray-100 bg-gradient-to-r from-blue-50 to-indigo-50 p-4 transition-colors hover:from-blue-100 hover:to-indigo-100">
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="flex items-center justify-between gap-2 font-bold leading-none text-gray-700"
+                  >
+                    RAB
+                  </Typography>
+                </th>
+                <th className="cursor-pointer border-y border-blue-gray-100 bg-gradient-to-r from-blue-50 to-indigo-50 p-4 transition-colors hover:from-blue-100 hover:to-indigo-100">
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="flex items-center justify-between gap-2 font-bold leading-none text-gray-700"
+                  >
+                    Keterangan
+                  </Typography>
+                </th>
+                <th className="cursor-pointer border-y border-blue-gray-100 bg-gradient-to-r from-blue-50 to-indigo-50 p-4 transition-colors hover:from-blue-100 hover:to-indigo-100">
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="flex items-center justify-between gap-2 font-bold leading-none text-gray-700"
+                  >
+                    Realisasi RAB
+                  </Typography>
+                </th>
+                <th className="cursor-pointer border-y border-blue-gray-100 bg-gradient-to-r from-blue-50 to-indigo-50 p-4 transition-colors hover:from-blue-100 hover:to-indigo-100">
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="flex items-center justify-between gap-2 font-bold leading-none text-gray-700"
+                  >
+                    Link BA Penyelesaian
+                  </Typography>
+                </th>
+                <th className="cursor-pointer border-y border-blue-gray-100 bg-gradient-to-r from-blue-50 to-indigo-50 p-4 pr-32 transition-colors hover:from-blue-100 hover:to-indigo-100">
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="flex items-center justify-between gap-2 font-bold leading-none text-gray-700"
+                  >
+                    Bulan Selesai
+                  </Typography>
+                </th>
+                <th className="cursor-pointer border-y border-blue-gray-100 bg-gradient-to-r from-blue-50 to-indigo-50 p-4 transition-colors hover:from-blue-100 hover:to-indigo-100">
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="flex items-center justify-between gap-2 font-bold leading-none text-gray-700"
+                  >
+                    Status Anomali
+                  </Typography>
+                </th>
+                <th className="cursor-pointer border-y border-blue-gray-100 bg-gradient-to-r from-blue-50 to-indigo-50 p-4 transition-colors hover:from-blue-100 hover:to-indigo-100">
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="flex items-center justify-between gap-2 font-bold leading-none text-gray-700"
+                  >
+                    Action
+                  </Typography>
+                </th>
+            </tr>
+          </thead>            <tbody>
+              {currentData.map((row, index) => (
+                <tr key={row.id} className="hover:bg-gradient-to-r hover:from-blue-50/50 hover:to-indigo-50/50 transition-all duration-200 border-b border-gray-100">
+                  {/* Use a unique key from your data (e.g., id) */}
+                  <td className="p-4 border-b border-blue-gray-50">
+                    <div className="flex items-center justify-center w-8 h-8 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full">
+                      <Typography
+                        variant="small"
+                        className="font-bold text-white"
+                      >
+                        {index + 1 + (viewAll ? 0 : indexOfFirstRow)}
+                      </Typography>
+                    </div>
+                  </td>
                 <td className="p-4 border-b border-blue-gray-50">
                   <Typography
                     variant="small"
@@ -1022,33 +1102,47 @@ const AGList = () => {
             ))}
           </tbody>
         </table>
-      </CardBody>
-      {/* Tampilkan pagination hanya jika mode viewAll tidak aktif */}
-      {!viewAll && (
-        <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
-          <Typography variant="small" color="blue-gray" className="font-normal">
-            Page {currentPage} of {totalPages}
-          </Typography>
-          <div className="flex gap-2">
-            <Button
-              variant="outlined"
-              size="sm"
-              onClick={handlePrevious}
-              disabled={currentPage === 1}
-            >
-              Previous
-            </Button>
-            <Button
-              variant="outlined"
-              size="sm"
-              onClick={handleNext}
-              disabled={currentPage === totalPages}
-            >
-              Next
-            </Button>
-          </div>        </CardFooter>
-      )}
+      </CardBody>        {/* Enhanced Pagination */}
+        {!viewAll && (
+          <CardFooter className="flex items-center justify-between border-t border-gray-200 bg-gradient-to-r from-gray-50 to-gray-100 p-6 rounded-b-2xl">
+            <div className="flex items-center space-x-2">
+              <Typography variant="small" color="blue-gray" className="font-semibold text-gray-700">
+                Halaman {currentPage} dari {totalPages}
+              </Typography>
+              <Typography variant="small" className="text-gray-500">
+                ({data.length} total data)
+              </Typography>
+            </div>
+            <div className="flex gap-3">
+              <Button
+                variant="outlined"
+                size="sm"
+                onClick={handlePrevious}
+                disabled={currentPage === 1}
+                className="border-gray-300 text-gray-700 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700 transition-all duration-200"
+              >
+                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+                Previous
+              </Button>
+              <Button
+                variant="outlined"
+                size="sm"
+                onClick={handleNext}
+                disabled={currentPage === totalPages}
+                className="border-gray-300 text-gray-700 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700 transition-all duration-200"
+              >
+                Next
+                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Button>
+            </div>
+          </CardFooter>
+        )}
     </Card>
+    </div>
     </div>
   );
 };

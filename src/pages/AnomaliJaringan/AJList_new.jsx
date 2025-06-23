@@ -271,15 +271,79 @@ const AJList = () => {
                     <Typography variant="small" className="font-semibold text-gray-700">
                       Kategori
                     </Typography>
-                  </th>
-                  <th className="p-4 text-left border-b border-gray-200">
+                  </th>                  <th className="p-4 text-left border-b border-gray-200">
                     <Typography variant="small" className="font-semibold text-gray-700">
                       Tgl Temuan
                     </Typography>
                   </th>
                   <th className="p-4 text-left border-b border-gray-200">
                     <Typography variant="small" className="font-semibold text-gray-700">
-                      Status
+                      Tgl Rencana
+                    </Typography>
+                  </th>
+                  <th className="p-4 text-left border-b border-gray-200">
+                    <Typography variant="small" className="font-semibold text-gray-700">
+                      Tgl Realisasi
+                    </Typography>
+                  </th>
+                  <th className="p-4 text-left border-b border-gray-200">
+                    <Typography variant="small" className="font-semibold text-gray-700">
+                      Mayor/Minor
+                    </Typography>
+                  </th>
+                  <th className="p-4 text-left border-b border-gray-200">
+                    <Typography variant="small" className="font-semibold text-gray-700">
+                      Status Selesai
+                    </Typography>
+                  </th>
+                  <th className="p-4 text-left border-b border-gray-200">
+                    <Typography variant="small" className="font-semibold text-gray-700">
+                      Data Pendukung
+                    </Typography>
+                  </th>
+                  <th className="p-4 text-left border-b border-gray-200">
+                    <Typography variant="small" className="font-semibold text-gray-700">
+                      Usulan Perbaikan
+                    </Typography>
+                  </th>
+                  <th className="p-4 text-left border-b border-gray-200">
+                    <Typography variant="small" className="font-semibold text-gray-700">
+                      Pelaksana
+                    </Typography>
+                  </th>
+                  <th className="p-4 text-left border-b border-gray-200">
+                    <Typography variant="small" className="font-semibold text-gray-700">
+                      Perkiraan Anggaran
+                    </Typography>
+                  </th>
+                  <th className="p-4 text-left border-b border-gray-200">
+                    <Typography variant="small" className="font-semibold text-gray-700">
+                      RAB URL
+                    </Typography>
+                  </th>
+                  <th className="p-4 text-left border-b border-gray-200">
+                    <Typography variant="small" className="font-semibold text-gray-700">
+                      Keterangan
+                    </Typography>
+                  </th>
+                  <th className="p-4 text-left border-b border-gray-200">
+                    <Typography variant="small" className="font-semibold text-gray-700">
+                      Realisasi RAB
+                    </Typography>
+                  </th>
+                  <th className="p-4 text-left border-b border-gray-200">
+                    <Typography variant="small" className="font-semibold text-gray-700">
+                      BA Penyelesaian
+                    </Typography>
+                  </th>
+                  <th className="p-4 text-left border-b border-gray-200">
+                    <Typography variant="small" className="font-semibold text-gray-700">
+                      Bulan Selesai
+                    </Typography>
+                  </th>
+                  <th className="p-4 text-left border-b border-gray-200">
+                    <Typography variant="small" className="font-semibold text-gray-700">
+                      Status Anomali
                     </Typography>
                   </th>
                   <th className="p-4 text-left border-b border-gray-200">
@@ -372,24 +436,258 @@ const AJList = () => {
                           }
                           className="text-xs font-medium"
                         />
+                      )}                    </td>                    <td className="p-4 border-b border-gray-200">
+                      {editingId === row.id ? (
+                        <Input
+                          size="sm"
+                          type="date"
+                          value={editData.tanggal_temuan || ""}
+                          onChange={(e) => handleChange("tanggal_temuan", e.target.value)}
+                          className="min-w-[150px]"
+                        />
+                      ) : (
+                        <Typography variant="small" className="text-gray-600">
+                          {new Date(row.tanggal_temuan).toLocaleDateString('id-ID')}
+                        </Typography>
                       )}
                     </td>
                     <td className="p-4 border-b border-gray-200">
-                      <Typography variant="small" className="text-gray-600">
-                        {new Date(row.tanggal_temuan).toLocaleDateString('id-ID')}
-                      </Typography>
+                      {editingId === row.id ? (
+                        <Input
+                          size="sm"
+                          type="date"
+                          value={editData.tanggal_rencana || ""}
+                          onChange={(e) => handleChange("tanggal_rencana", e.target.value)}
+                          className="min-w-[150px]"
+                        />
+                      ) : (
+                        <Typography variant="small" className="text-gray-600">
+                          {row.tanggal_rencana ? new Date(row.tanggal_rencana).toLocaleDateString('id-ID') : '-'}
+                        </Typography>
+                      )}
                     </td>
                     <td className="p-4 border-b border-gray-200">
-                      <Chip
-                        variant="gradient"
-                        size="sm"
-                        value={row.status_anomali}
-                        color={
-                          row.status_anomali === "Closed" ? "green" :
-                          row.status_anomali === "Open" ? "red" : "orange"
-                        }
-                        className="text-xs font-medium"
-                      />
+                      {editingId === row.id ? (
+                        <Input
+                          size="sm"
+                          type="date"
+                          value={editData.tanggal_realisasi || ""}
+                          onChange={(e) => handleChange("tanggal_realisasi", e.target.value)}
+                          className="min-w-[150px]"
+                        />
+                      ) : (
+                        <Typography variant="small" className="text-gray-600">
+                          {row.tanggal_realisasi ? new Date(row.tanggal_realisasi).toLocaleDateString('id-ID') : '-'}
+                        </Typography>
+                      )}
+                    </td>
+                    <td className="p-4 border-b border-gray-200">
+                      {editingId === row.id ? (
+                        <Select
+                          size="sm"
+                          value={editData.anomali_mayor_minor || ""}
+                          onChange={(e) => handleChange("anomali_mayor_minor", e)}
+                        >
+                          <Option value="Mayor">Mayor</Option>
+                          <Option value="Minor">Minor</Option>
+                        </Select>
+                      ) : (
+                        <Chip
+                          variant="gradient"
+                          size="sm"
+                          value={row.anomali_mayor_minor}
+                          color={row.anomali_mayor_minor === 'Mayor' ? 'red' : 'blue'}
+                          className="text-xs font-medium"
+                        />
+                      )}
+                    </td>
+                    <td className="p-4 border-b border-gray-200">
+                      {editingId === row.id ? (
+                        <Input
+                          size="sm"
+                          value={editData.status_selesai || ""}
+                          onChange={(e) => handleChange("status_selesai", e.target.value)}
+                          className="min-w-[120px]"
+                        />
+                      ) : (
+                        <Typography variant="small" className="text-gray-600">
+                          {row.status_selesai || '-'}
+                        </Typography>
+                      )}
+                    </td>
+                    <td className="p-4 border-b border-gray-200">
+                      {editingId === row.id ? (
+                        <Input
+                          size="sm"
+                          value={editData.data_pendukung_url || ""}
+                          onChange={(e) => handleChange("data_pendukung_url", e.target.value)}
+                          className="min-w-[150px]"
+                          placeholder="URL data pendukung"
+                        />
+                      ) : (
+                        row.data_pendukung_url ? (
+                          <a href={row.data_pendukung_url} target="_blank" rel="noopener noreferrer">
+                            <Typography variant="small" className="text-blue-600 hover:text-blue-800 underline">
+                              Link
+                            </Typography>
+                          </a>
+                        ) : (
+                          <Typography variant="small" className="text-gray-400">-</Typography>
+                        )
+                      )}
+                    </td>
+                    <td className="p-4 border-b border-gray-200 max-w-xs">
+                      {editingId === row.id ? (
+                        <Input
+                          size="sm"
+                          value={editData.usulan_perbaikan || ""}
+                          onChange={(e) => handleChange("usulan_perbaikan", e.target.value)}
+                          className="min-w-[200px]"
+                        />
+                      ) : (
+                        <Typography variant="small" className="text-gray-600 truncate">
+                          {row.usulan_perbaikan || '-'}
+                        </Typography>
+                      )}
+                    </td>
+                    <td className="p-4 border-b border-gray-200">
+                      {editingId === row.id ? (
+                        <Input
+                          size="sm"
+                          value={editData.pelaksana || ""}
+                          onChange={(e) => handleChange("pelaksana", e.target.value)}
+                          className="min-w-[120px]"
+                        />
+                      ) : (
+                        <Typography variant="small" className="text-gray-600">
+                          {row.pelaksana || '-'}
+                        </Typography>
+                      )}
+                    </td>
+                    <td className="p-4 border-b border-gray-200">
+                      {editingId === row.id ? (
+                        <Input
+                          size="sm"
+                          type="number"
+                          value={editData.perkiraan_kebutuhan_anggaran || ""}
+                          onChange={(e) => handleChange("perkiraan_kebutuhan_anggaran", e.target.value)}
+                          className="min-w-[150px]"
+                          placeholder="Masukkan anggaran"
+                        />
+                      ) : (
+                        <Typography variant="small" className="text-gray-600">
+                          {row.perkiraan_kebutuhan_anggaran ? `Rp ${Number(row.perkiraan_kebutuhan_anggaran).toLocaleString('id-ID')}` : '-'}
+                        </Typography>
+                      )}
+                    </td>                    <td className="p-4 border-b border-gray-200">
+                      {editingId === row.id ? (
+                        <Input
+                          size="sm"
+                          value={editData.rab_url || ""}
+                          onChange={(e) => handleChange("rab_url", e.target.value)}
+                          className="min-w-[150px]"
+                          placeholder="URL RAB"
+                        />
+                      ) : (
+                        row.rab_url ? (
+                          <a href={row.rab_url} target="_blank" rel="noopener noreferrer">
+                            <Typography variant="small" className="text-blue-600 hover:text-blue-800 underline">
+                              RAB
+                            </Typography>
+                          </a>
+                        ) : (
+                          <Typography variant="small" className="text-gray-400">-</Typography>
+                        )
+                      )}
+                    </td>
+                    <td className="p-4 border-b border-gray-200 max-w-xs">
+                      {editingId === row.id ? (
+                        <Input
+                          size="sm"
+                          value={editData.keterangan || ""}
+                          onChange={(e) => handleChange("keterangan", e.target.value)}
+                          className="min-w-[200px]"
+                        />
+                      ) : (
+                        <Typography variant="small" className="text-gray-600 truncate">
+                          {row.keterangan || '-'}
+                        </Typography>
+                      )}
+                    </td>
+                    <td className="p-4 border-b border-gray-200">
+                      {editingId === row.id ? (
+                        <Select
+                          size="sm"
+                          value={editData.realisasi_rab ? "true" : "false"}
+                          onChange={(e) => handleChange("realisasi_rab", e === "true")}
+                        >
+                          <Option value="true">Ya</Option>
+                          <Option value="false">Tidak</Option>
+                        </Select>
+                      ) : (
+                        <Chip
+                          variant="gradient"
+                          size="sm"
+                          value={row.realisasi_rab ? 'Ya' : 'Tidak'}
+                          color={row.realisasi_rab ? 'green' : 'red'}
+                          className="text-xs font-medium"
+                        />
+                      )}
+                    </td>
+                    <td className="p-4 border-b border-gray-200">
+                      {editingId === row.id ? (
+                        <Input
+                          size="sm"
+                          value={editData.ba_penyelesaian_url || ""}
+                          onChange={(e) => handleChange("ba_penyelesaian_url", e.target.value)}
+                          className="min-w-[150px]"
+                          placeholder="URL BA Penyelesaian"
+                        />
+                      ) : (
+                        row.ba_penyelesaian_url ? (
+                          <a href={row.ba_penyelesaian_url} target="_blank" rel="noopener noreferrer">
+                            <Typography variant="small" className="text-blue-600 hover:text-blue-800 underline">
+                              BA
+                            </Typography>
+                          </a>
+                        ) : (
+                          <Typography variant="small" className="text-gray-400">-</Typography>
+                        )
+                      )}
+                    </td>
+                    <td className="p-4 border-b border-gray-200">
+                      {editingId === row.id ? (
+                        <Input
+                          size="sm"
+                          value={editData.bulan_selesai || ""}
+                          onChange={(e) => handleChange("bulan_selesai", e.target.value)}
+                          className="min-w-[120px]"
+                        />
+                      ) : (
+                        <Typography variant="small" className="text-gray-600">
+                          {row.bulan_selesai || '-'}
+                        </Typography>
+                      )}
+                    </td>
+                    <td className="p-4 border-b border-gray-200">
+                      {editingId === row.id ? (
+                        <Select
+                          size="sm"
+                          value={editData.status_anomali || ""}
+                          onChange={(e) => handleChange("status_anomali", e)}
+                        >
+                          <Option value="OPEN">OPEN</Option>
+                          <Option value="CLOSED">CLOSED</Option>
+                        </Select>
+                      ) : (
+                        <Chip
+                          variant="gradient"
+                          size="sm"
+                          value={row.status_anomali}
+                          color={row.status_anomali === 'CLOSED' ? 'green' : 'red'}
+                          className="text-xs font-medium"
+                        />
+                      )}
                     </td>
                     <td className="p-4 border-b border-gray-200">
                       <div className="flex items-center gap-2">

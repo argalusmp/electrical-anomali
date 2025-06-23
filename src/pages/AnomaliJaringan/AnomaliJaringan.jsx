@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router"
-import AJList from "./AJList"
-import AJCreate from "./AJCreate"
+import AJList from "./AJList_new"
+import AJCreate from "./AJCreate_new"
 
 const AnomaliJaringan= () => {
   return (
